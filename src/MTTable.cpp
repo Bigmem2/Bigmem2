@@ -102,6 +102,9 @@ int MTTable::CsvToMTBin() {
     }
   }
 
+  //test line, remove
+  subtable.get_df().print();
+
   if (munmap(addr, length) == -1) {
     perror("munmap");
   }
