@@ -1,7 +1,7 @@
 [
     {
         "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-        "file_last_write": 1717607509.0,
+        "file_last_write": 1717621506.0,
         "definitions": [
             {
                 "usr": "c:@S@MTDataFrame@F@add_row#&1$@N@std@N@__1@S@vector>#$@N@std@N@__1@S@variant>#p3$@N@std@N@__1@S@basic_string>#C#$@N@std@N@__1@S@char_traits>#C#$@N@std@N@__1@S@allocator>#CdI#$@N@std@N@__1@S@allocator>#S2_#",
@@ -22,13 +22,53 @@
                 "line": 23,
                 "column": 36,
                 "hidden": false
+            },
+            {
+                "usr": "c:MTDataFrame.cpp@933@S@MTDataFrame@F@print#1@Sa@F@operator()<#$@N@std@N@__1@S@basic_string>#C#$@N@std@N@__1@S@char_traits>#C#$@N@std@N@__1@S@allocator>#C>#&1S0_#1",
+                "kind": 7,
+                "parent_name": "",
+                "name": "operator<>(const std::string &)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
+                "line": 39,
+                "column": 20,
+                "hidden": false
+            },
+            {
+                "usr": "c:MTDataFrame.cpp@933@S@MTDataFrame@F@print#1@Sa@F@operator()<#d>#&1d#1",
+                "kind": 7,
+                "parent_name": "",
+                "name": "operator<>(const double &)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
+                "line": 39,
+                "column": 20,
+                "hidden": false
+            },
+            {
+                "usr": "c:MTDataFrame.cpp@933@S@MTDataFrame@F@print#1@Sa@F@operator()<#I>#&1I#1",
+                "kind": 7,
+                "parent_name": "",
+                "name": "operator<>(const int &)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
+                "line": 39,
+                "column": 20,
+                "hidden": false
+            },
+            {
+                "usr": "c:@S@MTDataFrame@F@print#1",
+                "kind": 7,
+                "parent_name": "MTDataFrame",
+                "name": "print",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
+                "line": 27,
+                "column": 19,
+                "hidden": false
             }
         ],
         "hidden": false
     },
     {
         "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.h",
-        "file_last_write": 1717558426.0,
+        "file_last_write": 1717620928.0,
         "definitions": [
             {
                 "usr": "c:@S@MTDataFrame",
@@ -45,7 +85,7 @@
     },
     {
         "file": "/Users/mk/Desktop/MassiveTable/src/MTSubTable.cpp",
-        "file_last_write": 1717608552.0,
+        "file_last_write": 1717617605.0,
         "definitions": [
             {
                 "usr": "c:@S@MTSubTable@F@set_n_cols#d#",
@@ -108,12 +148,22 @@
                 "hidden": false
             },
             {
+                "usr": "c:@S@MTSubTable@F@table_add_row#&1$@N@std@N@__1@S@vector>#$@N@std@N@__1@S@variant>#p3$@N@std@N@__1@S@basic_string>#C#$@N@std@N@__1@S@char_traits>#C#$@N@std@N@__1@S@allocator>#CdI#$@N@std@N@__1@S@allocator>#S2_#",
+                "kind": 7,
+                "parent_name": "MTSubTable",
+                "name": "table_add_row(const std::vector<MTSubTable::DataType> &)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTSubTable.cpp",
+                "line": 39,
+                "column": 20,
+                "hidden": false
+            },
+            {
                 "usr": "c:@S@MTSubTable@F@get_n_cols#",
                 "kind": 7,
                 "parent_name": "MTSubTable",
                 "name": "get_n_cols",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTSubTable.cpp",
-                "line": 39,
+                "line": 43,
                 "column": 19,
                 "hidden": false
             },
@@ -123,7 +173,7 @@
                 "parent_name": "MTSubTable",
                 "name": "get_n_rows",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTSubTable.cpp",
-                "line": 43,
+                "line": 47,
                 "column": 19,
                 "hidden": false
             },
@@ -133,7 +183,7 @@
                 "parent_name": "MTSubTable",
                 "name": "get_c_size",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTSubTable.cpp",
-                "line": 47,
+                "line": 51,
                 "column": 22,
                 "hidden": false
             },
@@ -143,7 +193,7 @@
                 "parent_name": "MTSubTable",
                 "name": "get_xr",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTSubTable.cpp",
-                "line": 51,
+                "line": 55,
                 "column": 19,
                 "hidden": false
             },
@@ -153,7 +203,7 @@
                 "parent_name": "MTSubTable",
                 "name": "get_yr",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTSubTable.cpp",
-                "line": 55,
+                "line": 59,
                 "column": 19,
                 "hidden": false
             },
@@ -163,7 +213,7 @@
                 "parent_name": "MTSubTable",
                 "name": "get_df",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTSubTable.cpp",
-                "line": 59,
+                "line": 63,
                 "column": 25,
                 "hidden": false
             }
@@ -172,7 +222,7 @@
     },
     {
         "file": "/Users/mk/Desktop/MassiveTable/src/MTSubTable.h",
-        "file_last_write": 1717608302.0,
+        "file_last_write": 1717617611.0,
         "definitions": [
             {
                 "usr": "c:@S@MTSubTable",
@@ -181,6 +231,80 @@
                 "name": "MTSubTable",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTSubTable.h",
                 "line": 8,
+                "column": 7,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
+        "file_last_write": 1717621584.0,
+        "definitions": [
+            {
+                "usr": "c:@S@MTTable@F@r_initiate#$@N@Rcpp@S@String#",
+                "kind": 7,
+                "parent_name": "MTTable",
+                "name": "r_initiate(Rcpp::String)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
+                "line": 21,
+                "column": 15,
+                "hidden": false
+            },
+            {
+                "usr": "c:@S@MTTable@F@set_source_filepath#$@N@Rcpp@S@String#",
+                "kind": 7,
+                "parent_name": "MTTable",
+                "name": "set_source_filepath(Rcpp::String)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
+                "line": 29,
+                "column": 15,
+                "hidden": false
+            },
+            {
+                "usr": "c:@S@MTTable@F@get_source_filepath#",
+                "kind": 7,
+                "parent_name": "MTTable",
+                "name": "get_source_filepath",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
+                "line": 35,
+                "column": 22,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@process_csv_line#&$@S@MTSubTable#*1C#S2_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "process_csv_line(MTSubTable &, const char *, const char *)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
+                "line": 40,
+                "column": 6,
+                "hidden": false
+            },
+            {
+                "usr": "c:@S@MTTable@F@CsvToMTBin#",
+                "kind": 7,
+                "parent_name": "MTTable",
+                "name": "CsvToMTBin",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
+                "line": 65,
+                "column": 14,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.h",
+        "file_last_write": 1717620506.0,
+        "definitions": [
+            {
+                "usr": "c:@S@MTTable",
+                "kind": 2,
+                "parent_name": "",
+                "name": "MTTable",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.h",
+                "line": 10,
                 "column": 7,
                 "hidden": false
             }
