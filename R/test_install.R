@@ -7,7 +7,7 @@ test_install = function(load = FALSE) {
   if(load) {
     load_all()
   } else {
-    install()
+    install(dependencies = FALSE)
   }
 
 }

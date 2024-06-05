@@ -1,5 +1,6 @@
 
 export(MyClass)
+export(test_install)
 import(methods)
 import(Rcpp)
 useDynLib(MassiveTable, .registration=TRUE)
