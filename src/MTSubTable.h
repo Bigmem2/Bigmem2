@@ -15,6 +15,8 @@ private:
   MTDataFrame df;
 
 public:
+  using DataType = std::variant<std::string, double, int>;
+
   MTSubTable(int n_cols, int n_rows, double c_size, int xr, int yr);
 
   void set_n_cols(double n_cols);
@@ -28,6 +30,8 @@ public:
   void set_yr(double yr);
 
   void set_df(MTDataFrame df);
+
+  void add_row(const std::vector<DataType>&);
 
   int get_n_cols();
 
