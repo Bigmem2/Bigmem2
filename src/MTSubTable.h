@@ -31,7 +31,7 @@ public:
 
   void set_df(MTDataFrame df);
 
-  void add_row(const std::vector<DataType>&);
+  void table_add_row(const std::vector<DataType>&);
 
   int get_n_cols();
 

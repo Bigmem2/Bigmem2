@@ -24,6 +24,25 @@ MTDataFrame::DataType MTDataFrame::get_element(size_t row, size_t col) const {
   return data[col][row];
 }
 
+void MTDataFrame::print() const {
+  // // Print column headers
+  // for (const auto& col : columns) {
+  //   Rcout << col << "\t";
+  // }
+  // Rcout << std::endl;
+
+  // Print rows
+  if (!data.empty()) {
+    size_t numRows = data[0].size();
+    for (size_t i = 0; i < numRows; ++i) {
+      for (size_t j = 0; j < data.size(); ++j) {
+        std::visit([](const auto& value) { Rcout << value << "\t"; }, data[j][i]);
+      }
+      Rcout << std::endl;
+    }
+  }
+}
+
 // RCPP_MODULE(MTDataFrameEx) {
 //   Rcpp::class_<MTDataFrame>("MTDataFrame")
 //   .constructor<int>()

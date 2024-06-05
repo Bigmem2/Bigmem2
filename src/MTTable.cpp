@@ -11,10 +11,29 @@
 #include "MTTable.h"
 using namespace Rcpp;
 
-MTTable::MTTable(std::vector<int> x, std::vector<int> y, std::vector<std::string> filepath){
+MTTable::MTTable(std::vector<int> x, std::vector<int> y, std::vector<std::string> filepath, std::string source_filepath){
   this->x = x;
   this->y = y;
   this->filepath = filepath;
+  this->source_filepath = source_filepath;
+}
+
+void MTTable::r_initiate(Rcpp::String r_filepath) {
+
+  MTTable::set_source_filepath(r_filepath);
+
+  MTTable::CsvToMTBin();
+
+}
+
+void MTTable::set_source_filepath(Rcpp::String r_filepath) {
+  // std::string r_filevar = static_cast<std::string>(r_filepath);
+  // this->filepath[0] = r_filevar;
+  this->source_filepath = static_cast<std::string>(r_filepath);
+}
+
+std::string MTTable::get_source_filepath() {
+  return source_filepath;
 }
 
 // not defined in the class, but helper for csv line reading
@@ -34,7 +53,7 @@ void process_csv_line(MTSubTable& subtable, const char* start, const char* end) 
 
   // add newly read row into data frame
   const std::vector<MTTable::DataType>& vals = values;
-  df.add_row(vals);
+  subtable.table_add_row(vals);
 
   // // print the parsed values
   // for(const auto& value : values) {
@@ -43,11 +62,11 @@ void process_csv_line(MTSubTable& subtable, const char* start, const char* end) 
   // Rcout << std::endl;
 }
 
-int MTTable::CsvToMTBin(std::string filepath){
+int MTTable::CsvToMTBin() {
 
   MTSubTable subtable(4, 3, 0.0, 0, 0);
 
-  int fd = open(filepath.c_str(), O_RDONLY);
+  int fd = open(get_source_filepath().c_str(), O_RDONLY);
   if (fd == -1) {
     perror("open");
     return 1;

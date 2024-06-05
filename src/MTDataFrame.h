@@ -27,6 +27,8 @@ public:
   //   }
   // }
 
+  void print() const;
+
 private:
   std::vector<std::vector<DataType>> data;
 };

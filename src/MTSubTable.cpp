@@ -36,8 +36,8 @@ MTSubTable::MTSubTable(int n_cols, int n_rows, double c_size, int xr, int yr) : 
     this->df = df;
   }
 
-  void add_row(const std::vector<DataType>& row) {
-    df.add_row(row)
+  void MTSubTable::table_add_row(const std::vector<MTSubTable::DataType>& row) {
+    df.add_row(row);
   }
 
   int MTSubTable::get_n_cols() {
