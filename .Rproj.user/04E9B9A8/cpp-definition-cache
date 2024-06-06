@@ -239,7 +239,7 @@
     },
     {
         "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
-        "file_last_write": 1717621584.0,
+        "file_last_write": 1717692109.0,
         "definitions": [
             {
                 "usr": "c:@S@MTTable@F@r_initiate#$@N@Rcpp@S@String#",
@@ -247,7 +247,7 @@
                 "parent_name": "MTTable",
                 "name": "r_initiate(Rcpp::String)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
-                "line": 21,
+                "line": 24,
                 "column": 15,
                 "hidden": false
             },
@@ -257,7 +257,7 @@
                 "parent_name": "MTTable",
                 "name": "set_source_filepath(Rcpp::String)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
-                "line": 29,
+                "line": 32,
                 "column": 15,
                 "hidden": false
             },
@@ -267,7 +267,7 @@
                 "parent_name": "MTTable",
                 "name": "get_source_filepath",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
-                "line": 35,
+                "line": 38,
                 "column": 22,
                 "hidden": false
             },
@@ -277,7 +277,7 @@
                 "parent_name": "",
                 "name": "process_csv_line(MTSubTable &, const char *, const char *)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
-                "line": 40,
+                "line": 43,
                 "column": 6,
                 "hidden": false
             },
@@ -287,7 +287,7 @@
                 "parent_name": "MTTable",
                 "name": "CsvToMTBin",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
-                "line": 65,
+                "line": 68,
                 "column": 14,
                 "hidden": false
             }
@@ -296,7 +296,7 @@
     },
     {
         "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.h",
-        "file_last_write": 1717620506.0,
+        "file_last_write": 1717690193.0,
         "definitions": [
             {
                 "usr": "c:@S@MTTable",
@@ -306,6 +306,33 @@
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.h",
                 "line": 10,
                 "column": 7,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "/Users/mk/Desktop/MassiveTable/src/RcppBindings.cpp",
+        "file_last_write": 1717690639.0,
+        "definitions": [
+            {
+                "usr": "c:@F@create_MTTable#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "create_MTTable",
+                "file": "/Users/mk/Desktop/MassiveTable/src/RcppBindings.cpp",
+                "line": 8,
+                "column": 6,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@r_initiateMTTable#*$@S@SEXPREC#$@N@Rcpp@S@String#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "r_initiateMTTable(SEXP, Rcpp::String)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/RcppBindings.cpp",
+                "line": 15,
+                "column": 6,
                 "hidden": false
             }
         ],

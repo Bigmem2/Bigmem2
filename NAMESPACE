@@ -1,6 +1,8 @@
 
 export(MyClass)
 export(test_install)
+export(create_MTTable)
+export(r_initiateMTTable)
 import(methods)
 import(Rcpp)
 useDynLib(MassiveTable, .registration=TRUE)

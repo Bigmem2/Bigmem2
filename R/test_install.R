@@ -1,13 +1,13 @@
 
 test_install = function(load = FALSE) {
 
-  clean_dll()
-  compileAttributes()
+  devtools::clean_dll()
+  Rcpp::compileAttributes()
 
   if(load) {
-    load_all()
+    devtools::load_all()
   } else {
-    install(dependencies = FALSE)
+    devtools::install(dependencies = FALSE)
   }
 
 }

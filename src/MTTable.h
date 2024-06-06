@@ -17,6 +17,8 @@ private:
 public:
   using DataType = std::variant<std::string, double, int>;
 
+  MTTable();
+
   MTTable(std::vector<int> x, std::vector<int> y, std::vector<std::string> filepath, std::string source_filepath);
 
   void r_initiate(Rcpp::String r_filepath);
