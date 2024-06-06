@@ -44,6 +44,11 @@ void MTDataFrame::print() const {
 
 }
 
+void serialize(std::ofstream& ofs) {
+
+
+}
+
 // RCPP_MODULE(MTDataFrameEx) {
 //   Rcpp::class_<MTDataFrame>("MTDataFrame")
 //   .constructor<int>()

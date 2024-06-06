@@ -29,8 +29,11 @@ public:
 
   void print() const;
 
+  void serialize(std::ofstream& ofs, MTDataFrame& df);
+
 private:
   std::vector<std::vector<DataType>> data;
+
 };
 
 #endif //MTDATAFRAME_H
