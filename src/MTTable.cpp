@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <cstring>
 #include <fstream>
+#include <filesystem>
 #include "MTDataFrame.h"
 #include "MTSubTable.h"
 #include "MTTable.h"
@@ -58,11 +59,6 @@ void process_csv_line(MTSubTable& subtable, const char* start, const char* end) 
   const std::vector<MTTable::DataType>& vals = values;
   subtable.table_add_row(vals);
 
-  // // print the parsed values
-  // for(const auto& value : values) {
-  //   Rcout << value << " ";
-  // }
-  // Rcout << std::endl;
 }
 
 int MTTable::CsvToMTBin() {
@@ -112,8 +108,46 @@ int MTTable::CsvToMTBin() {
     perror("munmap");
   }
 
+  // write a subtable to binary file
+  if (std::filesystem::create_directory("mt")) {
+    Rcout << "New mt/ directory created successfully." << std::endl;
+  } else {
+    Rcout << "Failed to create directory mt/." << std::endl;
+    return 1;
+  }
+
+  std::ofstream ofs("mt/subtable.bin", std::ios::binary);
+  if (!ofs) {
+    Rcout << "Failed to open mt/subtable.bin file for writing." << std::endl;
+    return 1;
+  }
+
+  ofs.write(reinterpret_cast<const char*>(&subtable), sizeof(subtable));
+
+  ofs.close();
+
+  MTSubTable sb2;
+
+  // readMTBinSubTable("mt/subtable.bin", sb2);
+
+  // sb2.get_df().print();
+
   close(fd);
 
   return 0;
 
+}
+
+int MTTable::readMTBinSubTable(const std::string& filename, MTSubTable& subtable) {
+
+  std::ifstream ifs(filename, std::ios::binary);
+  if (!ifs) {
+    Rcout << "Failed to read MTBin into MTSubFile; could not open file." << std::endl;
+    return 1;
+  }
+
+  ifs.read(reinterpret_cast<char*>(&subtable), sizeof(subtable));
+  ifs.close();
+
+  return 0;
 }

@@ -17,6 +17,8 @@ private:
 public:
   using DataType = std::variant<std::string, double, int>;
 
+  MTSubTable();
+
   MTSubTable(int n_cols, int n_rows, double c_size, int xr, int yr);
 
   void set_n_cols(double n_cols);

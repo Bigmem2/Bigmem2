@@ -28,6 +28,10 @@ public:
   // save the bin location/name and coordinates into MTTable
   int CsvToMTBin();
 
+  // int readMTBin();
+
+  int readMTBinSubTable(const std::string& filename, MTSubTable& subtable);
+
   // wrap to rcpp to r
   void set_source_filepath(Rcpp::String r_filepath);
   std::string get_source_filepath();

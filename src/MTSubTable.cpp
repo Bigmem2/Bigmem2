@@ -3,6 +3,8 @@
 #include "MTSubTable.h"
 using namespace Rcpp;
 
+MTSubTable::MTSubTable()
+  : n_cols(), n_rows(), c_size(), xr(), yr(), df(4) {};
 
 MTSubTable::MTSubTable(int n_cols, int n_rows, double c_size, int xr, int yr) : df(n_cols) {
     this->n_cols = n_cols;
