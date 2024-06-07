@@ -36,6 +36,10 @@ Rcpp::DataFrame MTDataFrame::to_r() {
 
   Rcpp::DataFrame df;
 
+  size_t nCols = data.size();
+
+  std::vector<std::vector<std::string>>
+
   for (size_t i = 0; i < data.size(); ++i) {
 
     df.push_back(data[i]);
