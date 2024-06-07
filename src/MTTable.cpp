@@ -122,11 +122,23 @@ int MTTable::CsvToMTBin() {
     return 1;
   }
 
-  ofs.write(reinterpret_cast<const char*>(&subtable), sizeof(subtable));
+  // ofs.write(reinterpret_cast<const char*>(&subtable), sizeof(subtable));
+
+  subtable.get_df().serialize(ofs);
 
   ofs.close();
 
-  MTSubTable sb2;
+  MTDataFrame df2;
+
+  std::ifstream ifs("mt/subtable.bin", std::ios::binary);
+  if (!ifs) {
+    Rcout << "Failed to open mt/subtable.bin file for reading." << std::endl;
+    return 1;
+  }
+
+  df2.deserialize(ifs);
+
+  df2.print();
 
   // readMTBinSubTable("mt/subtable.bin", sb2);
 

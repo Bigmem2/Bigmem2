@@ -1,1 +1,32 @@
-CXX_STD = CXX11 # Required for C++11
+#CXX_STD = CXX11 # Required for C++11
+
+# Set the C++ standard to C++17
+CXX_STD = CXX17
+
+# Compiler and linker flags
+CXXFLAGS += -O3 -march=native -mtune=native -DNDEBUG -fopenmp
+LDFLAGS += -fopenmp
+
+# Additional flags for more aggressive optimizations
+CXXFLAGS += -funroll-loops -ffast-math -finline-functions -fmerge-all-constants
+
+# Memory and parallelization optimizations
+CXXFLAGS += -D_GLIBCXX_USE_CXX11_ABI=1
+CXXFLAGS += -fopenmp -pthread
+
+# Enable link-time optimization (LTO)
+CXXFLAGS += -flto
+LDFLAGS += -flto
+
+# Diagnostic flags to help with debugging and performance analysis
+CXXFLAGS += -fstack-protector-strong -Wall -Wextra -Wpedantic
+
+# Use Position Independent Code (PIC)
+CXXFLAGS += -fPIC
+
+# Other flags
+CXXFLAGS += -Wl,--no-undefined -Wl,--as-needed
+
+# Include Rcpp
+PKG_CXXFLAGS = $(SHLIB_OPENMP_CXXFLAGS) $(shell $(R_HOME)/bin/Rscript -e "Rcpp:::CxxFlags()")
+PKG_LIBS = $(SHLIB_OPENMP_CXXFLAGS) $(shell $(R_HOME)/bin/Rscript -e "Rcpp:::LdFlags()")

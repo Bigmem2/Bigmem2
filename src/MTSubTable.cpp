@@ -1,4 +1,6 @@
 #include <Rcpp.h>
+#include <iostream>
+#include <fstream>
 #include "MTDataFrame.h"
 #include "MTSubTable.h"
 using namespace Rcpp;
@@ -66,6 +68,22 @@ MTDataFrame MTSubTable::get_df() {
     return df;
   }
 
+
+void MTSubTable::serialize(std::ofstream& ofs) const {
+  ofs.write(reinterpret_cast<const char*>(&n_cols), sizeof(n_cols));
+  ofs.write(reinterpret_cast<const char*>(&n_rows), sizeof(n_rows));
+  ofs.write(reinterpret_cast<const char*>(&c_size), sizeof(c_size));
+  ofs.write(reinterpret_cast<const char*>(&xr), sizeof(xr));
+  ofs.write(reinterpret_cast<const char*>(&yr), sizeof(yr));
+}
+
+void MTSubTable::deserialize(std::ifstream& ifs) {
+  ifs.read(reinterpret_cast<char*>(&n_cols), sizeof(n_cols));
+  ifs.read(reinterpret_cast<char*>(&n_rows), sizeof(n_rows));
+  ifs.read(reinterpret_cast<char*>(&c_size), sizeof(c_size));
+  ifs.read(reinterpret_cast<char*>(&xr), sizeof(xr));
+  ifs.read(reinterpret_cast<char*>(&yr), sizeof(yr));
+}
 
 
 // RCPP_MODULE(MTSubTableEx) {

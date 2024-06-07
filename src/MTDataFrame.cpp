@@ -8,9 +8,17 @@
 //
 // using namespace Rcpp;
 
+#include <Rcpp.h>
+#include <iostream>
+#include <fstream>
 #include "MTDataFrame.h"
+using namespace Rcpp;
 
 // RCPP_EXPOSED_CLASS(MTDataFrame);
+
+MTDataFrame::MTDataFrame() : data(0) {}
+
+MTDataFrame::MTDataFrame(const Rcpp::IntegerVector n) : data(n(0)) {}
 
 MTDataFrame::MTDataFrame(const int& n) : data(n) {}
 
@@ -22,6 +30,18 @@ void MTDataFrame::add_row(const std::vector<MTDataFrame::DataType>& row) {
 
 MTDataFrame::DataType MTDataFrame::get_element(size_t row, size_t col) const {
   return data[col][row];
+}
+
+Rcpp::DataFrame MTDataFrame::to_r() {
+
+  Rcpp::DataFrame df;
+
+  for (size_t i = 0; i < data.size(); ++i) {
+
+    df.push_back(data[i]);
+  }
+
+  return df;
 }
 
 void MTDataFrame::print() const {
@@ -44,10 +64,100 @@ void MTDataFrame::print() const {
 
 }
 
-void serialize(std::ofstream& ofs) {
+void MTDataFrame::serialize(std::ofstream& ofs) const {
 
+  size_t outerSize = data.size();
+  ofs.write(reinterpret_cast<const char*>(&outerSize), sizeof(outerSize));
 
+  for (const auto& innerVec : data) {
+
+    size_t innerSize = innerVec.size();
+    ofs.write(reinterpret_cast<const char*>(&innerSize), sizeof(innerSize));
+
+    for (const auto& variant : innerVec) {
+
+      size_t index = variant.index();
+      ofs.write(reinterpret_cast<const char*>(&index), sizeof(index));
+
+      std::visit([&ofs](const auto& value) {
+
+        using T = std::decay_t<decltype(value)>;
+
+        if constexpr (std::is_same_v<T, std::string>) {
+          size_t length = value.size();
+          ofs.write(reinterpret_cast<const char*>(&length), sizeof(length));
+          ofs.write(value.c_str(), length);
+        } else {
+
+          ofs.write(reinterpret_cast<const char*>(&value), sizeof(value));
+        }
+      }, variant);
+    }
+  }
 }
+
+void MTDataFrame::deserialize(std::ifstream& ifs) {
+
+  size_t outerSize;
+  ifs.read(reinterpret_cast<char*>(&outerSize), sizeof(outerSize));
+
+  data.resize(outerSize);
+
+  for (size_t i = 0; i < outerSize; ++i) {
+
+    size_t innerSize;
+    ifs.read(reinterpret_cast<char*>(&innerSize), sizeof(innerSize));
+
+    data[i].resize(innerSize);
+
+    for (size_t j = 0; j < innerSize; ++j) {
+
+      size_t index;
+      ifs.read(reinterpret_cast<char*>(&index), sizeof(index));
+
+      switch (index) {
+      case 0: { // std::string
+        size_t length;
+        ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
+        std::string value(length, ' ');
+        ifs.read(&value[0], length);
+        data[i][j] = value;
+        break;
+      }
+      case 1: { // double
+        double value;
+        ifs.read(reinterpret_cast<char*>(&value), sizeof(value));
+        data[i][j] = value;
+        break;
+      }
+      case 2: { // int
+        int value;
+        ifs.read(reinterpret_cast<char*>(&value), sizeof(value));
+        data[i][j] = value;
+        break;
+      }
+      default:
+        throw std::runtime_error("Unknown variant index");
+      }
+    }
+  }
+}
+
+// void MTDataFrame::r_test_serialize(Rcpp::String r_filepath) {
+//
+//   MTDataFrame df(2);
+//   df.add_row({1,2});
+//
+// }
+
+
+
+
+
+
+
+
+
 
 // RCPP_MODULE(MTDataFrameEx) {
 //   Rcpp::class_<MTDataFrame>("MTDataFrame")

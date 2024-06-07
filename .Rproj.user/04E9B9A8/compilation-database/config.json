@@ -6,6 +6,7 @@
         "-I/opt/R/arm64/include",
         "-I/opt/homebrew/opt/llvm/include",
         "-fopenmp",
+        "-I/Users/mk/Library/R/arm64/4.3/library/Rcpp/include",
         "-fPIC",
         "-falign-functions=64",
         "-I/Users/mk/Library/R/arm64/4.3/library/Rcpp/include",
@@ -19,8 +20,8 @@
     ],
     "pch": "Rcpp",
     "is_cpp": true,
-    "hash": "1668537681171760700217171802741717180274",
-    "compiler": "5736394071626570827",
+    "hash": "1668537681171760700217177843341717180274",
+    "compiler": "3418996843655177114",
     "rversion": "4.3.1",
     "dbversion": 4
 }

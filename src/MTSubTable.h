@@ -47,6 +47,10 @@ public:
 
   MTDataFrame get_df();
 
+  void serialize(std::ofstream& ofs) const;
+
+  void deserialize(std::ifstream& ifs);
+
 };
 
 #endif //MTSUBTABLE_H
