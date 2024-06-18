@@ -14,6 +14,7 @@ private:
   int yr;
   MTDataFrame df;
 
+
 public:
   using DataType = std::variant<std::string, double, int>;
 

@@ -1,7 +1,7 @@
 [
     {
         "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-        "file_last_write": 1717788024.0,
+        "file_last_write": 1717791507.0,
         "definitions": [
             {
                 "usr": "c:@S@MTDataFrame@F@add_row#&1$@N@std@N@__1@S@vector>#$@N@std@N@__1@S@variant>#p3$@N@std@N@__1@S@basic_string>#C#$@N@std@N@__1@S@char_traits>#C#$@N@std@N@__1@S@allocator>#CdI#$@N@std@N@__1@S@allocator>#S2_#",
@@ -24,32 +24,42 @@
                 "hidden": false
             },
             {
-                "usr": "c:MTDataFrame.cpp@1124@S@MTDataFrame@F@print#1@Sa@F@operator()<#$@N@std@N@__1@S@basic_string>#C#$@N@std@N@__1@S@char_traits>#C#$@N@std@N@__1@S@allocator>#C>#&1S0_#1",
+                "usr": "c:@S@MTDataFrame@F@to_r#",
+                "kind": 7,
+                "parent_name": "MTDataFrame",
+                "name": "to_r",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
+                "line": 35,
+                "column": 30,
+                "hidden": false
+            },
+            {
+                "usr": "c:MTDataFrame.cpp@1475@S@MTDataFrame@F@print#1@Sa@F@operator()<#$@N@std@N@__1@S@basic_string>#C#$@N@std@N@__1@S@char_traits>#C#$@N@std@N@__1@S@allocator>#C>#&1S0_#1",
                 "kind": 7,
                 "parent_name": "",
                 "name": "operator<>(const std::string &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-                "line": 47,
+                "line": 67,
                 "column": 20,
                 "hidden": false
             },
             {
-                "usr": "c:MTDataFrame.cpp@1124@S@MTDataFrame@F@print#1@Sa@F@operator()<#d>#&1d#1",
+                "usr": "c:MTDataFrame.cpp@1475@S@MTDataFrame@F@print#1@Sa@F@operator()<#d>#&1d#1",
                 "kind": 7,
                 "parent_name": "",
                 "name": "operator<>(const double &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-                "line": 47,
+                "line": 67,
                 "column": 20,
                 "hidden": false
             },
             {
-                "usr": "c:MTDataFrame.cpp@1124@S@MTDataFrame@F@print#1@Sa@F@operator()<#I>#&1I#1",
+                "usr": "c:MTDataFrame.cpp@1475@S@MTDataFrame@F@print#1@Sa@F@operator()<#I>#&1I#1",
                 "kind": 7,
                 "parent_name": "",
                 "name": "operator<>(const int &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-                "line": 47,
+                "line": 67,
                 "column": 20,
                 "hidden": false
             },
@@ -59,37 +69,37 @@
                 "parent_name": "MTDataFrame",
                 "name": "print",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-                "line": 35,
+                "line": 55,
                 "column": 19,
                 "hidden": false
             },
             {
-                "usr": "c:MTDataFrame.cpp@1735@S@MTDataFrame@F@serialize#&$@N@std@N@__1@S@basic_ofstream>#C#$@N@std@N@__1@S@char_traits>#C#1@Sa@F@operator()<#$@N@std@N@__1@S@basic_string>#C#S2_#$@N@std@N@__1@S@allocator>#C>#&1S3_#1",
+                "usr": "c:MTDataFrame.cpp@2086@S@MTDataFrame@F@serialize#&$@N@std@N@__1@S@basic_ofstream>#C#$@N@std@N@__1@S@char_traits>#C#1@Sa@F@operator()<#$@N@std@N@__1@S@basic_string>#C#S2_#$@N@std@N@__1@S@allocator>#C>#&1S3_#1",
                 "kind": 7,
                 "parent_name": "",
                 "name": "operator<>(const std::string &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-                "line": 70,
+                "line": 90,
                 "column": 18,
                 "hidden": false
             },
             {
-                "usr": "c:MTDataFrame.cpp@1735@S@MTDataFrame@F@serialize#&$@N@std@N@__1@S@basic_ofstream>#C#$@N@std@N@__1@S@char_traits>#C#1@Sa@F@operator()<#d>#&1d#1",
+                "usr": "c:MTDataFrame.cpp@2086@S@MTDataFrame@F@serialize#&$@N@std@N@__1@S@basic_ofstream>#C#$@N@std@N@__1@S@char_traits>#C#1@Sa@F@operator()<#d>#&1d#1",
                 "kind": 7,
                 "parent_name": "",
                 "name": "operator<>(const double &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-                "line": 70,
+                "line": 90,
                 "column": 18,
                 "hidden": false
             },
             {
-                "usr": "c:MTDataFrame.cpp@1735@S@MTDataFrame@F@serialize#&$@N@std@N@__1@S@basic_ofstream>#C#$@N@std@N@__1@S@char_traits>#C#1@Sa@F@operator()<#I>#&1I#1",
+                "usr": "c:MTDataFrame.cpp@2086@S@MTDataFrame@F@serialize#&$@N@std@N@__1@S@basic_ofstream>#C#$@N@std@N@__1@S@char_traits>#C#1@Sa@F@operator()<#I>#&1I#1",
                 "kind": 7,
                 "parent_name": "",
                 "name": "operator<>(const int &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-                "line": 70,
+                "line": 90,
                 "column": 18,
                 "hidden": false
             },
@@ -99,7 +109,7 @@
                 "parent_name": "MTDataFrame",
                 "name": "serialize(std::ofstream &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-                "line": 55,
+                "line": 75,
                 "column": 19,
                 "hidden": false
             },
@@ -109,7 +119,7 @@
                 "parent_name": "MTDataFrame",
                 "name": "deserialize(std::ifstream &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-                "line": 87,
+                "line": 107,
                 "column": 19,
                 "hidden": false
             }
@@ -118,7 +128,7 @@
     },
     {
         "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.h",
-        "file_last_write": 1717788008.0,
+        "file_last_write": 1717789670.0,
         "definitions": [
             {
                 "usr": "c:@S@MTDataFrame",
@@ -292,7 +302,7 @@
     },
     {
         "file": "/Users/mk/Desktop/MassiveTable/src/MTSubTable.h",
-        "file_last_write": 1717779956.0,
+        "file_last_write": 1718142492.0,
         "definitions": [
             {
                 "usr": "c:@S@MTSubTable",
