@@ -1,7 +1,7 @@
 [
     {
         "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-        "file_last_write": 1717791507.0,
+        "file_last_write": 1718767171.0,
         "definitions": [
             {
                 "usr": "c:@S@MTDataFrame@F@add_row#&1$@N@std@N@__1@S@vector>#$@N@std@N@__1@S@variant>#p3$@N@std@N@__1@S@basic_string>#C#$@N@std@N@__1@S@char_traits>#C#$@N@std@N@__1@S@allocator>#CdI#$@N@std@N@__1@S@allocator>#S2_#",
@@ -24,6 +24,126 @@
                 "hidden": false
             },
             {
+                "usr": "c:MTDataFrame.cpp@1501@S@MTDataFrame@F@to_r#@Sa@F@operator()<#$@N@std@N@__1@S@basic_string>#C#$@N@std@N@__1@S@char_traits>#C#$@N@std@N@__1@S@allocator>#C>#&1S0_#1",
+                "kind": 7,
+                "parent_name": "",
+                "name": "operator<>(const std::string &)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
+                "line": 58,
+                "column": 20,
+                "hidden": false
+            },
+            {
+                "usr": "c:MTDataFrame.cpp@1501@S@MTDataFrame@F@to_r#@Sa@F@operator()<#d>#&1d#1",
+                "kind": 7,
+                "parent_name": "",
+                "name": "operator<>(const double &)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
+                "line": 58,
+                "column": 20,
+                "hidden": false
+            },
+            {
+                "usr": "c:MTDataFrame.cpp@1501@S@MTDataFrame@F@to_r#@Sa@F@operator()<#I>#&1I#1",
+                "kind": 7,
+                "parent_name": "",
+                "name": "operator<>(const int &)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
+                "line": 58,
+                "column": 20,
+                "hidden": false
+            },
+            {
+                "usr": "c:MTDataFrame.cpp@2142@S@MTDataFrame@F@to_r#@Sa@F@operator()<#$@N@std@N@__1@S@basic_string>#C#$@N@std@N@__1@S@char_traits>#C#$@N@std@N@__1@S@allocator>#C>#&1S0_#1",
+                "kind": 7,
+                "parent_name": "",
+                "name": "operator<>(const std::string &)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
+                "line": 77,
+                "column": 20,
+                "hidden": false
+            },
+            {
+                "usr": "c:MTDataFrame.cpp@2142@S@MTDataFrame@F@to_r#@Sa@F@operator()<#d>#&1d#1",
+                "kind": 7,
+                "parent_name": "",
+                "name": "operator<>(const double &)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
+                "line": 77,
+                "column": 20,
+                "hidden": false
+            },
+            {
+                "usr": "c:MTDataFrame.cpp@2142@S@MTDataFrame@F@to_r#@Sa@F@operator()<#I>#&1I#1",
+                "kind": 7,
+                "parent_name": "",
+                "name": "operator<>(const int &)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
+                "line": 77,
+                "column": 20,
+                "hidden": false
+            },
+            {
+                "usr": "c:MTDataFrame.cpp@2569@S@MTDataFrame@F@to_r#@Sa@F@operator()<#$@N@std@N@__1@S@basic_string>#C#$@N@std@N@__1@S@char_traits>#C#$@N@std@N@__1@S@allocator>#C>#&1S0_#1",
+                "kind": 7,
+                "parent_name": "",
+                "name": "operator<>(const std::string &)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
+                "line": 88,
+                "column": 20,
+                "hidden": false
+            },
+            {
+                "usr": "c:MTDataFrame.cpp@2569@S@MTDataFrame@F@to_r#@Sa@F@operator()<#d>#&1d#1",
+                "kind": 7,
+                "parent_name": "",
+                "name": "operator<>(const double &)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
+                "line": 88,
+                "column": 20,
+                "hidden": false
+            },
+            {
+                "usr": "c:MTDataFrame.cpp@2569@S@MTDataFrame@F@to_r#@Sa@F@operator()<#I>#&1I#1",
+                "kind": 7,
+                "parent_name": "",
+                "name": "operator<>(const int &)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
+                "line": 88,
+                "column": 20,
+                "hidden": false
+            },
+            {
+                "usr": "c:MTDataFrame.cpp@2993@S@MTDataFrame@F@to_r#@Sa@F@operator()<#$@N@std@N@__1@S@basic_string>#C#$@N@std@N@__1@S@char_traits>#C#$@N@std@N@__1@S@allocator>#C>#&1S0_#1",
+                "kind": 7,
+                "parent_name": "",
+                "name": "operator<>(const std::string &)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
+                "line": 99,
+                "column": 20,
+                "hidden": false
+            },
+            {
+                "usr": "c:MTDataFrame.cpp@2993@S@MTDataFrame@F@to_r#@Sa@F@operator()<#d>#&1d#1",
+                "kind": 7,
+                "parent_name": "",
+                "name": "operator<>(const double &)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
+                "line": 99,
+                "column": 20,
+                "hidden": false
+            },
+            {
+                "usr": "c:MTDataFrame.cpp@2993@S@MTDataFrame@F@to_r#@Sa@F@operator()<#I>#&1I#1",
+                "kind": 7,
+                "parent_name": "",
+                "name": "operator<>(const int &)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
+                "line": 99,
+                "column": 20,
+                "hidden": false
+            },
+            {
                 "usr": "c:@S@MTDataFrame@F@to_r#",
                 "kind": 7,
                 "parent_name": "MTDataFrame",
@@ -34,32 +154,32 @@
                 "hidden": false
             },
             {
-                "usr": "c:MTDataFrame.cpp@1475@S@MTDataFrame@F@print#1@Sa@F@operator()<#$@N@std@N@__1@S@basic_string>#C#$@N@std@N@__1@S@char_traits>#C#$@N@std@N@__1@S@allocator>#C>#&1S0_#1",
+                "usr": "c:MTDataFrame.cpp@4510@S@MTDataFrame@F@print#1@Sa@F@operator()<#$@N@std@N@__1@S@basic_string>#C#$@N@std@N@__1@S@char_traits>#C#$@N@std@N@__1@S@allocator>#C>#&1S0_#1",
                 "kind": 7,
                 "parent_name": "",
                 "name": "operator<>(const std::string &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-                "line": 67,
+                "line": 158,
                 "column": 20,
                 "hidden": false
             },
             {
-                "usr": "c:MTDataFrame.cpp@1475@S@MTDataFrame@F@print#1@Sa@F@operator()<#d>#&1d#1",
+                "usr": "c:MTDataFrame.cpp@4510@S@MTDataFrame@F@print#1@Sa@F@operator()<#d>#&1d#1",
                 "kind": 7,
                 "parent_name": "",
                 "name": "operator<>(const double &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-                "line": 67,
+                "line": 158,
                 "column": 20,
                 "hidden": false
             },
             {
-                "usr": "c:MTDataFrame.cpp@1475@S@MTDataFrame@F@print#1@Sa@F@operator()<#I>#&1I#1",
+                "usr": "c:MTDataFrame.cpp@4510@S@MTDataFrame@F@print#1@Sa@F@operator()<#I>#&1I#1",
                 "kind": 7,
                 "parent_name": "",
                 "name": "operator<>(const int &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-                "line": 67,
+                "line": 158,
                 "column": 20,
                 "hidden": false
             },
@@ -69,37 +189,37 @@
                 "parent_name": "MTDataFrame",
                 "name": "print",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-                "line": 55,
+                "line": 146,
                 "column": 19,
                 "hidden": false
             },
             {
-                "usr": "c:MTDataFrame.cpp@2086@S@MTDataFrame@F@serialize#&$@N@std@N@__1@S@basic_ofstream>#C#$@N@std@N@__1@S@char_traits>#C#1@Sa@F@operator()<#$@N@std@N@__1@S@basic_string>#C#S2_#$@N@std@N@__1@S@allocator>#C>#&1S3_#1",
+                "usr": "c:MTDataFrame.cpp@5121@S@MTDataFrame@F@serialize#&$@N@std@N@__1@S@basic_ofstream>#C#$@N@std@N@__1@S@char_traits>#C#1@Sa@F@operator()<#$@N@std@N@__1@S@basic_string>#C#S2_#$@N@std@N@__1@S@allocator>#C>#&1S3_#1",
                 "kind": 7,
                 "parent_name": "",
                 "name": "operator<>(const std::string &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-                "line": 90,
+                "line": 181,
                 "column": 18,
                 "hidden": false
             },
             {
-                "usr": "c:MTDataFrame.cpp@2086@S@MTDataFrame@F@serialize#&$@N@std@N@__1@S@basic_ofstream>#C#$@N@std@N@__1@S@char_traits>#C#1@Sa@F@operator()<#d>#&1d#1",
+                "usr": "c:MTDataFrame.cpp@5121@S@MTDataFrame@F@serialize#&$@N@std@N@__1@S@basic_ofstream>#C#$@N@std@N@__1@S@char_traits>#C#1@Sa@F@operator()<#d>#&1d#1",
                 "kind": 7,
                 "parent_name": "",
                 "name": "operator<>(const double &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-                "line": 90,
+                "line": 181,
                 "column": 18,
                 "hidden": false
             },
             {
-                "usr": "c:MTDataFrame.cpp@2086@S@MTDataFrame@F@serialize#&$@N@std@N@__1@S@basic_ofstream>#C#$@N@std@N@__1@S@char_traits>#C#1@Sa@F@operator()<#I>#&1I#1",
+                "usr": "c:MTDataFrame.cpp@5121@S@MTDataFrame@F@serialize#&$@N@std@N@__1@S@basic_ofstream>#C#$@N@std@N@__1@S@char_traits>#C#1@Sa@F@operator()<#I>#&1I#1",
                 "kind": 7,
                 "parent_name": "",
                 "name": "operator<>(const int &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-                "line": 90,
+                "line": 181,
                 "column": 18,
                 "hidden": false
             },
@@ -109,7 +229,7 @@
                 "parent_name": "MTDataFrame",
                 "name": "serialize(std::ofstream &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-                "line": 75,
+                "line": 166,
                 "column": 19,
                 "hidden": false
             },
@@ -119,7 +239,7 @@
                 "parent_name": "MTDataFrame",
                 "name": "deserialize(std::ifstream &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTDataFrame.cpp",
-                "line": 107,
+                "line": 198,
                 "column": 19,
                 "hidden": false
             }
@@ -403,29 +523,8 @@
     },
     {
         "file": "/Users/mk/Desktop/MassiveTable/src/RcppBindings.cpp",
-        "file_last_write": 1717787180.0,
-        "definitions": [
-            {
-                "usr": "c:@F@create_MTTable#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "create_MTTable",
-                "file": "/Users/mk/Desktop/MassiveTable/src/RcppBindings.cpp",
-                "line": 8,
-                "column": 6,
-                "hidden": false
-            },
-            {
-                "usr": "c:@F@r_initiateMTTable#*$@S@SEXPREC#$@N@Rcpp@S@String#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "r_initiateMTTable(SEXP, Rcpp::String)",
-                "file": "/Users/mk/Desktop/MassiveTable/src/RcppBindings.cpp",
-                "line": 15,
-                "column": 6,
-                "hidden": false
-            }
-        ],
+        "file_last_write": 1718823900.0,
+        "definitions": [],
         "hidden": false
     },
     {

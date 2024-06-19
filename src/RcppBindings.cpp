@@ -19,7 +19,8 @@ void r_initiateMTTable(SEXP xp, Rcpp::String r_filepath) {
 
 //[[Rcpp::export]]
 Rcpp::DataFrame to_r(SEXP xp) {
-  Rcpp::Xptr<MTTable>
+  Rcpp::XPtr<MTTable> ptr(xp);
+  return ptr->to_r();
 }
 
 // to delete: binding to test the serialize routines

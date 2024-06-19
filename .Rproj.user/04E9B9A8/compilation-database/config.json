@@ -12,15 +12,14 @@
         "-I/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Rcpp/include",
         "-DEIGEN_DONT_VECTORIZE",
         "-I/Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include",
-        "-I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1",
-        "-I/Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include",
-        "-I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include",
-        "-I/Library/Developer/CommandLineTools/usr/include"
+        "-I/opt/homebrew/opt/llvm/bin/../include/c++/v1",
+        "-I/opt/homebrew/Cellar/llvm/16.0.6/lib/clang/16/include",
+        "-I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
     ],
     "pch": "Rcpp",
     "is_cpp": true,
     "hash": "1668537681171760700217177843341717180274",
-    "compiler": "5736394071626570827",
+    "compiler": "15871466848637756154",
     "rversion": "4.4.0",
     "dbversion": 4
 }
