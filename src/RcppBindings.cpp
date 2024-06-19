@@ -17,6 +17,11 @@ void r_initiateMTTable(SEXP xp, Rcpp::String r_filepath) {
   ptr->r_initiate(r_filepath);
 }
 
+//[[Rcpp::export]]
+Rcpp::DataFrame to_r(SEXP xp) {
+  Rcpp::Xptr<MTTable>
+}
+
 // to delete: binding to test the serialize routines
 // //[[Rcpp::export]]
 // SEXP create_MTDataFrame(Rcpp::IntegerVector n) {

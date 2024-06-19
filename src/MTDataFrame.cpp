@@ -34,22 +34,113 @@ MTDataFrame::DataType MTDataFrame::get_element(size_t row, size_t col) const {
 
 Rcpp::DataFrame MTDataFrame::to_r() {
 
-  Rcpp::DataFrame df;
+  // Check if the data is empty
+  if (data.empty() || data[0].empty()) {
+    return Rcpp::DataFrame::create();
+  }
 
+  // Number of columns
   size_t nCols = data.size();
 
+  // Initialize R vectors for each column
   std::vector<std::vector<std::string>> stringCols(nCols);
   std::vector<std::vector<double>> doubleCols(nCols);
   std::vector<std::vector<int>> intCols(nCols);
 
+  std::vector<std::string> colNames;
 
+  // Detect the type of each column
+  std::vector<char> colTypes(nCols, 'u'); // u: undefined, s: string, d: double, i: int
 
-  for (size_t i = 0; i < data.size(); ++i) {
-
-    df.push_back(data[i]);
+  for (size_t col = 0; col < nCols; ++col) {
+    for (const auto& value : data[col]) {
+      if (colTypes[col] == 'u') {
+        std::visit([&colTypes, col](const auto& val) {
+          using T = std::decay_t<decltype(val)>;
+          if constexpr (std::is_same_v<T, std::string>) {
+            colTypes[col] = 's';
+          } else if constexpr (std::is_same_v<T, double>) {
+            colTypes[col] = 'd';
+          } else if constexpr (std::is_same_v<T, int>) {
+            colTypes[col] = 'i';
+          }
+        }, value);
+      }
+      if (colTypes[col] != 'u') break;
+    }
   }
 
-  return df;
+  // Fill R vectors based on detected column types
+  for (size_t col = 0; col < nCols; ++col) {
+    if (colTypes[col] == 's') {
+      for (const auto& value : data[col]) {
+        std::visit([&stringCols, col](const auto& val) {
+          using T = std::decay_t<decltype(val)>;
+          if constexpr (std::is_same_v<T, std::string>) {
+            stringCols[col].push_back(val);
+          } else {
+            stringCols[col].push_back(""); // Handle type mismatch gracefully
+          }
+        }, value);
+      }
+    } else if (colTypes[col] == 'd') {
+      for (const auto& value : data[col]) {
+        std::visit([&doubleCols, col](const auto& val) {
+          using T = std::decay_t<decltype(val)>;
+          if constexpr (std::is_same_v<T, double>) {
+            doubleCols[col].push_back(val);
+          } else {
+            doubleCols[col].push_back(NA_REAL); // Handle type mismatch gracefully
+          }
+        }, value);
+      }
+    } else if (colTypes[col] == 'i') {
+      for (const auto& value : data[col]) {
+        std::visit([&intCols, col](const auto& val) {
+          using T = std::decay_t<decltype(val)>;
+          if constexpr (std::is_same_v<T, int>) {
+            intCols[col].push_back(val);
+          } else {
+            intCols[col].push_back(NA_INTEGER); // Handle type mismatch gracefully
+          }
+        }, value);
+      }
+    }
+  }
+
+  // Create the DataFrame with the appropriate columns
+  Rcpp::List dfList(nCols);
+
+  for (size_t col = 0; col < nCols; ++col) {
+    if (colTypes[col] == 's') {
+      dfList[col] = stringCols[col];
+    } else if (colTypes[col] == 'd') {
+      dfList[col] = doubleCols[col];
+    } else if (colTypes[col] == 'i') {
+      dfList[col] = intCols[col];
+    }
+    colNames.push_back("V" + std::to_string(col + 1));
+  }
+
+  dfList.attr("names") = colNames;
+  return Rcpp::DataFrame(dfList);
+
+  // Rcpp::DataFrame df;
+  //
+  // size_t nCols = data.size();
+  //
+  // std::vector<std::vector<std::string>> stringCols(nCols);
+  // std::vector<std::vector<double>> doubleCols(nCols);
+  // std::vector<std::vector<int>> intCols(nCols);
+  //
+  //
+  //
+  // for (size_t i = 0; i < data.size(); ++i) {
+  //
+  //   df.push_back(data[i]);
+  // }
+  //
+  // return df;
 }
 
 void MTDataFrame::print() const {
