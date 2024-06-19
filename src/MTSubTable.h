@@ -52,6 +52,8 @@ public:
 
   void deserialize(std::ifstream& ifs);
 
+  Rcpp::DataFrame subtable_to_r(int x, int y);
+
 };
 
 #endif //MTSUBTABLE_H

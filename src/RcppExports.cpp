@@ -10,16 +10,6 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// MTDataFrame::to_r
-Rcpp::DataFrame MTDataFrame::to_r();
-RcppExport SEXP _MassiveTable_MTDataFrame::to_r() {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(MTDataFrame::to_r());
-    return rcpp_result_gen;
-END_RCPP
-}
 // create_MTTable
 SEXP create_MTTable();
 RcppExport SEXP _MassiveTable_create_MTTable() {
@@ -89,7 +79,6 @@ END_RCPP
 RcppExport SEXP _rcpp_module_boot_MyClassEx();
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_MassiveTable_MTDataFrame::to_r", (DL_FUNC) &_MassiveTable_MTDataFrame::to_r, 0},
     {"_MassiveTable_create_MTTable", (DL_FUNC) &_MassiveTable_create_MTTable, 0},
     {"_MassiveTable_r_initiateMTTable", (DL_FUNC) &_MassiveTable_r_initiateMTTable, 2},
     {"_MassiveTable_read_csv", (DL_FUNC) &_MassiveTable_read_csv, 1},
