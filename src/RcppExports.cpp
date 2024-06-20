@@ -21,14 +21,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // r_initiateMTTable
-void r_initiateMTTable(SEXP xp, Rcpp::String r_filepath);
+Rcpp::DataFrame r_initiateMTTable(SEXP xp, Rcpp::String r_filepath);
 RcppExport SEXP _MassiveTable_r_initiateMTTable(SEXP xpSEXP, SEXP r_filepathSEXP) {
 BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type xp(xpSEXP);
     Rcpp::traits::input_parameter< Rcpp::String >::type r_filepath(r_filepathSEXP);
-    r_initiateMTTable(xp, r_filepath);
-    return R_NilValue;
+    rcpp_result_gen = Rcpp::wrap(r_initiateMTTable(xp, r_filepath));
+    return rcpp_result_gen;
 END_RCPP
 }
 // read_csv

@@ -12,16 +12,16 @@ SEXP create_MTTable() {
 
 // initialize by calling r_initiate on an MTTable object via the external pointer
 //[[Rcpp::export]]
-void r_initiateMTTable(SEXP xp, Rcpp::String r_filepath) {
+Rcpp::DataFrame r_initiateMTTable(SEXP xp, Rcpp::String r_filepath) {
   Rcpp::XPtr<MTTable> ptr(xp);
-  ptr->r_initiate(r_filepath);
+  return ptr->r_initiate(r_filepath);
 }
 
-//[[Rcpp::export]]
-Rcpp::DataFrame to_r(SEXP xp, Rcpp::IntegerVector x, Rcpp::IntegerVector y) {
-  Rcpp::XPtr<MTTable> ptr(xp);
-  return ptr->to_r(x, y);
-}
+// //[[Rcpp::export]]
+// Rcpp::DataFrame to_r() { //(SEXP xp, Rcpp::IntegerVector x, Rcpp::IntegerVector y) {
+//   Rcpp::XPtr<MTTable> ptr(xp);
+//   return ptr->to_r(x, y);
+// }
 
 // to delete: binding to test the serialize routines
 // //[[Rcpp::export]]

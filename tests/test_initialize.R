@@ -5,7 +5,7 @@ library(MassiveTable)
 mttable = MassiveTable::create_MTTable()
 
 # call the r_initiate method on the object being pointed at
-MassiveTable::r_initiateMTTable(mttable, "exdata.csv")
+data = MassiveTable::r_initiateMTTable(mttable, "exdata.csv")
 
 
 

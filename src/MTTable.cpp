@@ -7,6 +7,7 @@
 #include <cstring>
 #include <fstream>
 #include <filesystem>
+#include <algorithm>
 #include "MTDataFrame.h"
 #include "MTSubTable.h"
 #include "MTTable.h"
@@ -22,11 +23,11 @@ MTTable::MTTable(std::vector<int> x, std::vector<int> y, std::vector<std::string
   this->source_filepath = source_filepath;
 }
 
-void MTTable::r_initiate(Rcpp::String r_filepath) {
+Rcpp::DataFrame MTTable::r_initiate(Rcpp::String r_filepath) {
 
   MTTable::set_source_filepath(r_filepath);
 
-  MTTable::CsvToMTBin();
+  return MTTable::CsvToMTBin();
 
 }
 
@@ -61,7 +62,7 @@ void process_csv_line(MTSubTable& subtable, const char* start, const char* end) 
 
 }
 
-int MTTable::CsvToMTBin() {
+Rcpp::DataFrame MTTable::CsvToMTBin() {
 
   MTSubTable subtable(4, 3, 0.0, 0, 0);
 
@@ -116,9 +117,9 @@ int MTTable::CsvToMTBin() {
     return 1;
   }
 
-  std::ofstream ofs("mt/subtable.bin", std::ios::binary);
+  std::ofstream ofs("mt/subtable.mt", std::ios::binary);
   if (!ofs) {
-    Rcout << "Failed to open mt/subtable.bin file for writing." << std::endl;
+    Rcout << "Failed to open mt/subtable.mt file for writing." << std::endl;
     return 1;
   }
 
@@ -130,9 +131,9 @@ int MTTable::CsvToMTBin() {
 
   MTDataFrame df2;
 
-  std::ifstream ifs("mt/subtable.bin", std::ios::binary);
+  std::ifstream ifs("mt/subtable.mt", std::ios::binary);
   if (!ifs) {
-    Rcout << "Failed to open mt/subtable.bin file for reading." << std::endl;
+    Rcout << "Failed to open mt/subtable.mt file for reading." << std::endl;
     return 1;
   }
 
@@ -140,13 +141,13 @@ int MTTable::CsvToMTBin() {
 
   df2.print();
 
-  // readMTBinSubTable("mt/subtable.bin", sb2);
+  // readMTBinSubTable("mt/subtable.mt", sb2);
 
   // sb2.get_df().print();
 
   close(fd);
 
-  return 0;
+  return df2.to_r();
 
 }
 
@@ -163,3 +164,27 @@ int MTTable::readMTBinSubTable(const std::string& filename, MTSubTable& subtable
 
   return 0;
 }
+
+std::string MTTable::coord_to_file(int x, int y) {
+  auto max_x = std::max_element(x.begin(), x.end());
+  auto max_y = std::max_element(y.begin(), y.end());
+  int nrow = *max_x;
+  int ncol = *max_y;
+  int fc = nrow*;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

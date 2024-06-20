@@ -6,7 +6,7 @@ create_MTTable <- function() {
 }
 
 r_initiateMTTable <- function(xp, r_filepath) {
-    invisible(.Call(`_MassiveTable_r_initiateMTTable`, xp, r_filepath))
+    .Call(`_MassiveTable_r_initiateMTTable`, xp, r_filepath)
 }
 
 read_csv <- function(filepath) {

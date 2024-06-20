@@ -68,6 +68,10 @@ MTDataFrame MTSubTable::get_df() {
     return df;
   }
 
+Rcpp::DataFrame MTSubTable::subtable_to_r() {
+  return df.to_r();
+}
+
 
 void MTSubTable::serialize(std::ofstream& ofs) const {
   ofs.write(reinterpret_cast<const char*>(&n_cols), sizeof(n_cols));

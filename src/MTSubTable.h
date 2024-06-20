@@ -52,7 +52,7 @@ public:
 
   void deserialize(std::ifstream& ifs);
 
-  Rcpp::DataFrame subtable_to_r(int x, int y);
+  Rcpp::DataFrame subtable_to_r();
 
 };
 
