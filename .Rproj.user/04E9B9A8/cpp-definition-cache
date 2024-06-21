@@ -265,7 +265,7 @@
     },
     {
         "file": "/Users/mk/Desktop/MassiveTable/src/MTSubTable.cpp",
-        "file_last_write": 1717780823.0,
+        "file_last_write": 1718913217.0,
         "definitions": [
             {
                 "usr": "c:@S@MTSubTable@F@set_n_cols#d#",
@@ -398,12 +398,22 @@
                 "hidden": false
             },
             {
+                "usr": "c:@S@MTSubTable@F@subtable_to_r#",
+                "kind": 7,
+                "parent_name": "MTSubTable",
+                "name": "subtable_to_r",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTSubTable.cpp",
+                "line": 71,
+                "column": 29,
+                "hidden": false
+            },
+            {
                 "usr": "c:@S@MTSubTable@F@serialize#&$@N@std@N@__1@S@basic_ofstream>#C#$@N@std@N@__1@S@char_traits>#C#1",
                 "kind": 7,
                 "parent_name": "MTSubTable",
                 "name": "serialize(std::ofstream &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTSubTable.cpp",
-                "line": 72,
+                "line": 76,
                 "column": 18,
                 "hidden": false
             },
@@ -413,7 +423,7 @@
                 "parent_name": "MTSubTable",
                 "name": "deserialize(std::ifstream &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTSubTable.cpp",
-                "line": 80,
+                "line": 84,
                 "column": 18,
                 "hidden": false
             }
@@ -422,13 +432,24 @@
     },
     {
         "file": "/Users/mk/Desktop/MassiveTable/src/MTSubTable.h",
-        "file_last_write": 1718824412.0,
-        "definitions": [],
+        "file_last_write": 1718912889.0,
+        "definitions": [
+            {
+                "usr": "c:@S@MTSubTable",
+                "kind": 2,
+                "parent_name": "",
+                "name": "MTSubTable",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTSubTable.h",
+                "line": 8,
+                "column": 7,
+                "hidden": false
+            }
+        ],
         "hidden": false
     },
     {
         "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
-        "file_last_write": 1717788119.0,
+        "file_last_write": 1718915075.0,
         "definitions": [
             {
                 "usr": "c:@S@MTTable@F@r_initiate#$@N@Rcpp@S@String#",
@@ -436,8 +457,8 @@
                 "parent_name": "MTTable",
                 "name": "r_initiate(Rcpp::String)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
-                "line": 25,
-                "column": 15,
+                "line": 26,
+                "column": 26,
                 "hidden": false
             },
             {
@@ -446,7 +467,7 @@
                 "parent_name": "MTTable",
                 "name": "set_source_filepath(Rcpp::String)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
-                "line": 33,
+                "line": 34,
                 "column": 15,
                 "hidden": false
             },
@@ -456,7 +477,7 @@
                 "parent_name": "MTTable",
                 "name": "get_source_filepath",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
-                "line": 39,
+                "line": 40,
                 "column": 22,
                 "hidden": false
             },
@@ -466,7 +487,7 @@
                 "parent_name": "",
                 "name": "process_csv_line(MTSubTable &, const char *, const char *)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
-                "line": 44,
+                "line": 45,
                 "column": 6,
                 "hidden": false
             },
@@ -476,8 +497,8 @@
                 "parent_name": "MTTable",
                 "name": "CsvToMTBin",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
-                "line": 64,
-                "column": 14,
+                "line": 65,
+                "column": 26,
                 "hidden": false
             },
             {
@@ -486,8 +507,18 @@
                 "parent_name": "MTTable",
                 "name": "readMTBinSubTable(const std::string &, MTSubTable &)",
                 "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
-                "line": 153,
+                "line": 154,
                 "column": 14,
+                "hidden": false
+            },
+            {
+                "usr": "c:@S@MTTable@F@coord_to_file#I#I#",
+                "kind": 7,
+                "parent_name": "MTTable",
+                "name": "coord_to_file(int, int)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.cpp",
+                "line": 168,
+                "column": 22,
                 "hidden": false
             }
         ],
@@ -495,7 +526,7 @@
     },
     {
         "file": "/Users/mk/Desktop/MassiveTable/src/MTTable.h",
-        "file_last_write": 1717702029.0,
+        "file_last_write": 1718914606.0,
         "definitions": [
             {
                 "usr": "c:@S@MTTable",
@@ -512,8 +543,29 @@
     },
     {
         "file": "/Users/mk/Desktop/MassiveTable/src/RcppBindings.cpp",
-        "file_last_write": 1718825587.0,
-        "definitions": [],
+        "file_last_write": 1718912606.0,
+        "definitions": [
+            {
+                "usr": "c:@F@create_MTTable#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "create_MTTable",
+                "file": "/Users/mk/Desktop/MassiveTable/src/RcppBindings.cpp",
+                "line": 8,
+                "column": 6,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@r_initiateMTTable#*$@S@SEXPREC#$@N@Rcpp@S@String#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "r_initiateMTTable(SEXP, Rcpp::String)",
+                "file": "/Users/mk/Desktop/MassiveTable/src/RcppBindings.cpp",
+                "line": 15,
+                "column": 17,
+                "hidden": false
+            }
+        ],
         "hidden": false
     },
     {
