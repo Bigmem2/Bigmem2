@@ -165,13 +165,13 @@ int MTTable::readMTBinSubTable(const std::string& filename, MTSubTable& subtable
   return 0;
 }
 
-std::string MTTable::coord_to_file(int x, int y) {
-  auto max_x = std::max_element(x.begin(), x.end());
-  auto max_y = std::max_element(y.begin(), y.end());
-  int nrow = *max_x;
-  int ncol = *max_y;
-  int fc = nrow*;
-}
+// std::string MTTable::coord_to_file(int x, int y) {
+//   auto max_x = std::max_element(x.begin(), x.end());
+//   auto max_y = std::max_element(y.begin(), y.end());
+//   int nrow = *max_x;
+//   int ncol = *max_y;
+//   int fc = nrow*;
+// }
 
 
 

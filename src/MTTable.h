@@ -37,7 +37,7 @@ public:
   std::string get_source_filepath();
 
   // mapping between MTTable data and file locations/coordinates
-  std::string coord_to_file(int x, int y);
+  // std::string coord_to_file(int x, int y);
 
 };
 
