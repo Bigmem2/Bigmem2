@@ -34,7 +34,7 @@
     <img src="images/logo.jpeg" alt="Logo" width="380" height="200">
   </a>
 
-  <h3 align="center">`db12`   big data management in R    </h3>
+  <h3 align="center">Bigmem2    -   big data management in R    </h3>
 
   <p align="center">
     Easily manage data sets that can't fit into memory with minimum overhead
