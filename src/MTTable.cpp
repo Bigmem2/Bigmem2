@@ -141,9 +141,13 @@ Rcpp::DataFrame MTTable::CsvToMTBin() {
 
   df2.print();
 
-  // readMTBinSubTable("mt/subtable.mt", sb2);
+  Rcout << "Print using the reead subtable function" << std::endl;
 
-  // sb2.get_df().print();
+  MTSubTable sb2(4, 4, 0.0, 0, 0);
+
+  readMTBinSubTable("mt/subtable.mt", sb2);
+
+  sb2.get_df().print();
 
   close(fd);
 
