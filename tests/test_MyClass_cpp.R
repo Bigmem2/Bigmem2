@@ -7,7 +7,7 @@ compileAttributes()
 # load_all()
 install()
 
-library(MassiveTable)
+library(Bigmem2)
 
 obj = new(MyClass, 10)
 

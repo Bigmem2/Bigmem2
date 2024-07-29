@@ -2,26 +2,26 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 create_MTTable <- function() {
-    .Call(`_MassiveTable_create_MTTable`)
+    .Call(`_Bigmem2_create_MTTable`)
 }
 
 r_initiateMTTable <- function(xp, r_filepath) {
-    .Call(`_MassiveTable_r_initiateMTTable`, xp, r_filepath)
+    .Call(`_Bigmem2_r_initiateMTTable`, xp, r_filepath)
 }
 
 read_csv <- function(filepath) {
-    .Call(`_MassiveTable_read_csv`, filepath)
+    .Call(`_Bigmem2_read_csv`, filepath)
 }
 
 process_line <- function(start, end) {
-    invisible(.Call(`_MassiveTable_process_line`, start, end))
+    invisible(.Call(`_Bigmem2_process_line`, start, end))
 }
 
 process_csv_line <- function(start, end) {
-    invisible(.Call(`_MassiveTable_process_csv_line`, start, end))
+    invisible(.Call(`_Bigmem2_process_csv_line`, start, end))
 }
 
 read_csv_mmap <- function(filepath) {
-    .Call(`_MassiveTable_read_csv_mmap`, filepath)
+    .Call(`_Bigmem2_read_csv_mmap`, filepath)
 }
 

@@ -12,7 +12,7 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 
 // create_MTTable
 SEXP create_MTTable();
-RcppExport SEXP _MassiveTable_create_MTTable() {
+RcppExport SEXP _Bigmem2_create_MTTable() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -22,7 +22,7 @@ END_RCPP
 }
 // r_initiateMTTable
 Rcpp::DataFrame r_initiateMTTable(SEXP xp, Rcpp::String r_filepath);
-RcppExport SEXP _MassiveTable_r_initiateMTTable(SEXP xpSEXP, SEXP r_filepathSEXP) {
+RcppExport SEXP _Bigmem2_r_initiateMTTable(SEXP xpSEXP, SEXP r_filepathSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -34,7 +34,7 @@ END_RCPP
 }
 // read_csv
 int read_csv(std::string filepath);
-RcppExport SEXP _MassiveTable_read_csv(SEXP filepathSEXP) {
+RcppExport SEXP _Bigmem2_read_csv(SEXP filepathSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -45,7 +45,7 @@ END_RCPP
 }
 // process_line
 void process_line(const char* start, const char* end);
-RcppExport SEXP _MassiveTable_process_line(SEXP startSEXP, SEXP endSEXP) {
+RcppExport SEXP _Bigmem2_process_line(SEXP startSEXP, SEXP endSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const char* >::type start(startSEXP);
@@ -56,7 +56,7 @@ END_RCPP
 }
 // process_csv_line
 void process_csv_line(const char* start, const char* end);
-RcppExport SEXP _MassiveTable_process_csv_line(SEXP startSEXP, SEXP endSEXP) {
+RcppExport SEXP _Bigmem2_process_csv_line(SEXP startSEXP, SEXP endSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const char* >::type start(startSEXP);
@@ -67,7 +67,7 @@ END_RCPP
 }
 // read_csv_mmap
 int read_csv_mmap(std::string filepath);
-RcppExport SEXP _MassiveTable_read_csv_mmap(SEXP filepathSEXP) {
+RcppExport SEXP _Bigmem2_read_csv_mmap(SEXP filepathSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -80,17 +80,17 @@ END_RCPP
 RcppExport SEXP _rcpp_module_boot_MyClassEx();
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_MassiveTable_create_MTTable", (DL_FUNC) &_MassiveTable_create_MTTable, 0},
-    {"_MassiveTable_r_initiateMTTable", (DL_FUNC) &_MassiveTable_r_initiateMTTable, 2},
-    {"_MassiveTable_read_csv", (DL_FUNC) &_MassiveTable_read_csv, 1},
-    {"_MassiveTable_process_line", (DL_FUNC) &_MassiveTable_process_line, 2},
-    {"_MassiveTable_process_csv_line", (DL_FUNC) &_MassiveTable_process_csv_line, 2},
-    {"_MassiveTable_read_csv_mmap", (DL_FUNC) &_MassiveTable_read_csv_mmap, 1},
+    {"_Bigmem2_create_MTTable", (DL_FUNC) &_Bigmem2_create_MTTable, 0},
+    {"_Bigmem2_r_initiateMTTable", (DL_FUNC) &_Bigmem2_r_initiateMTTable, 2},
+    {"_Bigmem2_read_csv", (DL_FUNC) &_Bigmem2_read_csv, 1},
+    {"_Bigmem2_process_line", (DL_FUNC) &_Bigmem2_process_line, 2},
+    {"_Bigmem2_process_csv_line", (DL_FUNC) &_Bigmem2_process_csv_line, 2},
+    {"_Bigmem2_read_csv_mmap", (DL_FUNC) &_Bigmem2_read_csv_mmap, 1},
     {"_rcpp_module_boot_MyClassEx", (DL_FUNC) &_rcpp_module_boot_MyClassEx, 0},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_MassiveTable(DllInfo *dll) {
+RcppExport void R_init_Bigmem2(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

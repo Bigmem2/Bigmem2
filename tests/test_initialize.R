@@ -1,11 +1,11 @@
 
-library(MassiveTable)
+library(Bigmem2)
 
 # create an MTTable object and get a pointer
-mttable = MassiveTable::create_MTTable()
+mttable = Bigmem2::create_MTTable()
 
 # call the r_initiate method on the object being pointed at
-data = MassiveTable::r_initiateMTTable(mttable, "exdata.csv")
+data = Bigmem2::r_initiateMTTable(mttable, "exdata.csv")
 
 
 
