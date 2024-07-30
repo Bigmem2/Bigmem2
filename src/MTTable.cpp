@@ -141,13 +141,13 @@ Rcpp::DataFrame MTTable::CsvToMTBin() {
 
   df2.print();
 
-  Rcout << "Print using the reead subtable function" << std::endl;
-
-  MTSubTable sb2(4, 4, 0.0, 0, 0);
-
-  readMTBinSubTable("mt/subtable.mt", sb2);
-
-  sb2.get_df().print();
+  // Rcout << "Print using the reead subtable function" << std::endl;
+  //
+  // MTSubTable sb2(4, 3, 0.0, 0, 0);
+  //
+  // readMTBinSubTable("mt/subtable.mt", sb2);
+  //
+  // sb2.get_df().print();
 
   close(fd);
 
@@ -155,19 +155,20 @@ Rcpp::DataFrame MTTable::CsvToMTBin() {
 
 }
 
-int MTTable::readMTBinSubTable(const std::string& filename, MTSubTable& subtable) {
-
-  std::ifstream ifs(filename, std::ios::binary);
-  if (!ifs) {
-    Rcout << "Failed to read MTBin into MTSubFile; could not open file." << std::endl;
-    return 1;
-  }
-
-  ifs.read(reinterpret_cast<char*>(&subtable), sizeof(subtable));
-  ifs.close();
-
-  return 0;
-}
+// MTDataFrame::MTDataFrame MTTable::readMTBinDataFrame(const std::string& filename) {
+//
+//   MTDataFrame::MTDataFrame df;
+//
+//   std::ifstream ifs(filename, std::ios::binary);
+//   if (!ifs) {
+//     Rcout << "Failed to read MTBin into MTSubFile; could not open file." << std::endl;
+//     return 1;
+//   }
+//
+//   df.deserialize(ifs);
+//
+//   return df;
+// }
 
 // std::string MTTable::coord_to_file(int x, int y) {
 //   auto max_x = std::max_element(x.begin(), x.end());

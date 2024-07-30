@@ -30,7 +30,7 @@ public:
 
   // int readMTBin();
 
-  int readMTBinSubTable(const std::string& filename, MTSubTable& subtable);
+  MTDataFrame::MTDataFrame readMTBinDataFrame(const std::string& filename);
 
   // wrap to rcpp to r
   void set_source_filepath(Rcpp::String r_filepath);
