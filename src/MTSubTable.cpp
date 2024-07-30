@@ -6,7 +6,7 @@
 using namespace Rcpp;
 
 MTSubTable::MTSubTable()
-  : n_cols(), n_rows(), c_size(), xr(), yr(), df(4) {};
+  : n_cols(), n_rows(), c_size(), xr(), yr(), df() {};
 
 MTSubTable::MTSubTable(int n_cols, int n_rows, double c_size, int xr, int yr) : df(n_cols) {
     this->n_cols = n_cols;
@@ -74,6 +74,7 @@ Rcpp::DataFrame MTSubTable::subtable_to_r() {
 
 
 void MTSubTable::serialize(std::ofstream& ofs) const {
+  df.serialize(ofs);
   ofs.write(reinterpret_cast<const char*>(&n_cols), sizeof(n_cols));
   ofs.write(reinterpret_cast<const char*>(&n_rows), sizeof(n_rows));
   ofs.write(reinterpret_cast<const char*>(&c_size), sizeof(c_size));
@@ -82,6 +83,7 @@ void MTSubTable::serialize(std::ofstream& ofs) const {
 }
 
 void MTSubTable::deserialize(std::ifstream& ifs) {
+  df.deserialize(ifs);
   ifs.read(reinterpret_cast<char*>(&n_cols), sizeof(n_cols));
   ifs.read(reinterpret_cast<char*>(&n_rows), sizeof(n_rows));
   ifs.read(reinterpret_cast<char*>(&c_size), sizeof(c_size));
@@ -89,6 +91,11 @@ void MTSubTable::deserialize(std::ifstream& ifs) {
   ifs.read(reinterpret_cast<char*>(&yr), sizeof(yr));
 }
 
+
+// test functions
+void MTSubTable::r_test_subtable() {
+
+}
 
 // RCPP_MODULE(MTSubTableEx) {
 //   class_<MTSubTable>("MTSubTable")

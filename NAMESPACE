@@ -2,6 +2,7 @@
 export(MyClass)
 export(test_install)
 export(create_MTTable)
+export(test_subtable)
 export(r_initiateMTTable)
 import(methods)
 import(Rcpp)

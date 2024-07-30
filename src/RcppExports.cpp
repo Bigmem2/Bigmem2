@@ -32,6 +32,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// test_subtable
+SEXP test_subtable();
+RcppExport SEXP _Bigmem2_test_subtable() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(test_subtable());
+    return rcpp_result_gen;
+END_RCPP
+}
 // read_csv
 int read_csv(std::string filepath);
 RcppExport SEXP _Bigmem2_read_csv(SEXP filepathSEXP) {
@@ -82,6 +92,7 @@ RcppExport SEXP _rcpp_module_boot_MyClassEx();
 static const R_CallMethodDef CallEntries[] = {
     {"_Bigmem2_create_MTTable", (DL_FUNC) &_Bigmem2_create_MTTable, 0},
     {"_Bigmem2_r_initiateMTTable", (DL_FUNC) &_Bigmem2_r_initiateMTTable, 2},
+    {"_Bigmem2_test_subtable", (DL_FUNC) &_Bigmem2_test_subtable, 0},
     {"_Bigmem2_read_csv", (DL_FUNC) &_Bigmem2_read_csv, 1},
     {"_Bigmem2_process_line", (DL_FUNC) &_Bigmem2_process_line, 2},
     {"_Bigmem2_process_csv_line", (DL_FUNC) &_Bigmem2_process_csv_line, 2},

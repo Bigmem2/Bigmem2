@@ -17,6 +17,14 @@ Rcpp::DataFrame r_initiateMTTable(SEXP xp, Rcpp::String r_filepath) {
   return ptr->r_initiate(r_filepath);
 }
 
+// interface with various classes for testing purposes
+//[[Rcpp::export]]
+SEXP test_subtable() {
+  Rcpp::XPtr<MTSubTable> ptr(new MTSubTable(), true);
+  ptr->r_test_subtable();
+  return R_NilValue;
+}
+
 // //[[Rcpp::export]]
 // Rcpp::DataFrame to_r() { //(SEXP xp, Rcpp::IntegerVector x, Rcpp::IntegerVector y) {
 //   Rcpp::XPtr<MTTable> ptr(xp);
