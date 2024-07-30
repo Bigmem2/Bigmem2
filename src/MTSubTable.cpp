@@ -94,6 +94,28 @@ void MTSubTable::deserialize(std::ifstream& ifs) {
 
 // test functions
 void MTSubTable::r_test_subtable() {
+  // create a new MTSubtable, add some data, print, and serialiaze, deserialize
+  // basically, test all the supposed functionality and think of new functionality
+  // when necessary
+
+  // initialize
+  MTSubTable my_mtsub(2, 2, 0.0, 1, 1);
+
+  std::vector<DataType> row1 = {1.1, 2.2};
+  std::vector<DataType> row2 = {4.4, 5.5};
+
+  my_mtsub.table_add_row(row1);
+  my_mtsub.table_add_row(row2);
+
+  //print the table
+  my_mtsub.df.print();
+
+  //try the two serialization methods
+  // get this down to a one liner instead of a two liner?
+  std::ofstream ofs("mt_df_test/df1.mt", std::ios::binary);
+  my_mtsub.df.serialize(ofs);
+
+
 
 }
 
