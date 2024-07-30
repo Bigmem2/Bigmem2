@@ -114,7 +114,13 @@ void MTSubTable::r_test_subtable() {
   // get this down to a one liner instead of a two liner?
   std::ofstream ofs("mt_df_test/df1.mt", std::ios::binary);
   my_mtsub.df.serialize(ofs);
+  std::ofstream ofs2("mt_df_test/sub2.mt", std::ios::binary);
+  my_mtsub.serialize(ofs2);
 
+  // that worked, now try to deserialize into a new object
+  MTSubTable my_mtsub2;
+  std::ifstream ifs("mt_df_test/sub2.mt", std::ios::binary);
+  my_mtsub2.deserialize(ifs);
 
 
 }
