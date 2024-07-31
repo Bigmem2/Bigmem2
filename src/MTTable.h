@@ -13,6 +13,7 @@ private:
   std::vector<int> y;
   std::vector<std::string> filepath;
   std::string source_filepath;
+  std::vector<MTSubTable> loaded_subtables;
 
 public:
   using DataType = std::variant<std::string, double, int>;

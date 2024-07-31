@@ -14,9 +14,10 @@
 using namespace Rcpp;
 
 MTTable::MTTable()
-  : x(), y(), filepath(), source_filepath("") {}
+  : x(), y(), filepath(), source_filepath(""), loaded_subtables() {}
 
-MTTable::MTTable(std::vector<int> x, std::vector<int> y, std::vector<std::string> filepath, std::string source_filepath){
+MTTable::MTTable(std::vector<int> x, std::vector<int> y, std::vector<std::string> filepath, std::string source_filepath)
+  : loaded_subtables() {
   this->x = x;
   this->y = y;
   this->filepath = filepath;
