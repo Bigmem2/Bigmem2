@@ -39,6 +39,8 @@ public:
 
   void deserialize(std::ifstream& ifs);
 
+  // void deserialize();
+
   // void r_test_serialize(Rcpp::String r_filepath);
 
 private:

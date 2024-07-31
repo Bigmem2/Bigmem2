@@ -9,6 +9,8 @@ using namespace Rcpp;
 
 class MTTable {
 private:
+  std::string filepath;
+
   std::vector<int> x;
   std::vector<int> y;
   std::vector<std::string> filepath;

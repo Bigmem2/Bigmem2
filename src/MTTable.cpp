@@ -118,7 +118,7 @@ Rcpp::DataFrame MTTable::CsvToMTBin() {
     return 1;
   }
 
-  std::ofstream ofs("mt/subtable.mt", std::ios::binary);
+  std::ofstream ofs("mt/subtable.mt", std::ios::binary | std::ios::app);
   if (!ofs) {
     Rcout << "Failed to open mt/subtable.mt file for writing." << std::endl;
     return 1;
