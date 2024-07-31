@@ -74,21 +74,22 @@ Rcpp::DataFrame MTSubTable::subtable_to_r() {
 
 
 void MTSubTable::serialize(std::ofstream& ofs) const {
-  if(!ofs.is_open()) {
-    Rcpp::Rcout << "Error: file not open for writing." << std::endl;
-  }
-  df.serialize(ofs);
+  // if(!ofs.is_open()) {
+  //   Rcpp::Rcout << "Error: file not open for writing." << std::endl;
+  // }
   ofs.write(reinterpret_cast<const char*>(&n_cols), sizeof(n_cols));
   ofs.write(reinterpret_cast<const char*>(&n_rows), sizeof(n_rows));
+  df.serialize(ofs);
   ofs.write(reinterpret_cast<const char*>(&c_size), sizeof(c_size));
   ofs.write(reinterpret_cast<const char*>(&xr), sizeof(xr));
   ofs.write(reinterpret_cast<const char*>(&yr), sizeof(yr));
 }
 
 void MTSubTable::deserialize(std::ifstream& ifs) {
-  df.deserialize(ifs);
   ifs.read(reinterpret_cast<char*>(&n_cols), sizeof(n_cols));
   ifs.read(reinterpret_cast<char*>(&n_rows), sizeof(n_rows));
+  df = MTDataFrame(n_cols);
+  df.deserialize(ifs);
   ifs.read(reinterpret_cast<char*>(&c_size), sizeof(c_size));
   ifs.read(reinterpret_cast<char*>(&xr), sizeof(xr));
   ifs.read(reinterpret_cast<char*>(&yr), sizeof(yr));
@@ -123,7 +124,7 @@ void MTSubTable::r_test_subtable() {
   ofs2.close();
 
   // that worked, now try to deserialize into a new object
-  MTSubTable my_mtsub2(2, 2, 0.0, 1, 1);
+  MTSubTable my_mtsub2;
   std::ifstream ifs("mt_df_test/sub2.mt", std::ios::binary);
   my_mtsub2.deserialize(ifs);
 
@@ -143,19 +144,3 @@ void MTSubTable::r_test_subtable() {
 
 }
 
-// RCPP_MODULE(MTSubTableEx) {
-//   class_<MTSubTable>("MTSubTable")
-//   .constructor<int,int,double,int,int>()
-//   .method("set_n_cols", &MTSubTable::set_n_cols)
-//   .method("set_n_rows", &MTSubTable::set_n_rows)
-//   .method("set_c_size", &MTSubTable::set_c_size)
-//   .method("set_xr", &MTSubTable::set_xr)
-//   .method("set_yr", &MTSubTable::set_yr)
-//   .method("set_df", &MTSubTable::set_df)
-//   .method("get_n_cols", &MTSubTable::get_n_cols)
-//   .method("get_n_rows", &MTSubTable::get_n_rows)
-//   .method("get_c_size", &MTSubTable::get_c_size)
-//   .method("get_xr", &MTSubTable::get_xr)
-//   .method("get_yr", &MTSubTable::get_yr)
-//   .method("get_df", &MTSubTable::get_df);
-// }
