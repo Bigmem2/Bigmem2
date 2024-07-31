@@ -74,6 +74,9 @@ Rcpp::DataFrame MTSubTable::subtable_to_r() {
 
 
 void MTSubTable::serialize(std::ofstream& ofs) const {
+  if(!ofs.is_open()) {
+    Rcpp::Rcout << "Error: file not open for writing." << std::endl;
+  }
   df.serialize(ofs);
   ofs.write(reinterpret_cast<const char*>(&n_cols), sizeof(n_cols));
   ofs.write(reinterpret_cast<const char*>(&n_rows), sizeof(n_rows));
@@ -120,10 +123,23 @@ void MTSubTable::r_test_subtable() {
   ofs2.close();
 
   // that worked, now try to deserialize into a new object
-  // MTSubTable my_mtsub2;
-  // std::ifstream ifs("mt_df_test/sub2.mt", std::ios::binary);
-  // my_mtsub2.deserialize(ifs);
+  MTSubTable my_mtsub2(2, 2, 0.0, 1, 1);
+  std::ifstream ifs("mt_df_test/sub2.mt", std::ios::binary);
+  my_mtsub2.deserialize(ifs);
 
+  Rcout << "Print all of my_mtsub2 to make sure it matches data encoded." << std::endl;
+  Rcout << "n_cols" << std::endl;
+  Rcout << my_mtsub2.n_cols << std::endl;
+  Rcout << "n_rows" << std::endl;
+  Rcout << my_mtsub2.n_rows << std::endl;
+  Rcout << "c_size" << std::endl;
+  Rcout << my_mtsub2.c_size << std::endl;
+  Rcout << "xr" << std::endl;
+  Rcout << my_mtsub2.xr << std::endl;
+  Rcout << "yr" << std::endl;
+  Rcout << my_mtsub2.yr << std::endl;
+  Rcout << "df" << std::endl;
+  my_mtsub2.df.print();
 
 }
 
