@@ -9,6 +9,10 @@ r_initiateMTTable <- function(xp, r_filepath) {
     .Call(`_Bigmem2_r_initiateMTTable`, xp, r_filepath)
 }
 
+test_subtable <- function() {
+    .Call(`_Bigmem2_test_subtable`)
+}
+
 read_csv <- function(filepath) {
     .Call(`_Bigmem2_read_csv`, filepath)
 }

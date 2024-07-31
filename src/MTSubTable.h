@@ -54,6 +54,9 @@ public:
 
   Rcpp::DataFrame subtable_to_r();
 
+  // testing functions
+  void r_test_subtable();
+
 };
 
 #endif //MTSUBTABLE_H
