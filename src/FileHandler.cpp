@@ -43,33 +43,33 @@ off_t FileHandler::get_fileSize() const {
 }
 
 
-// Example usage
-int main() {
-
-  try {
-
-    const std::string file_name = "exdata.csv";
-    FileHandler file(file_name);
-
-    // Use file.get_fd() to access the file descriptor
-    int fd = file.get_fd();
-    // Rcout << "File descriptor: " << fd << std::endl;
-    std::cout << "File descriptor: " << fd << std::endl;
-
-    off_t size = file.get_fileSize();
-    // Rcout << "File size: " << size << std::endl;
-    std::cout << "File size: " << size << std::endl;
-
-
-    // Perform file operations here
-
-  } catch (const std::exception& e) {
-
-    std::cerr << e.what() << std::endl;
-  }
-
-  return 0;
-}
+// // Example usage
+// int main() {
+//
+//   try {
+//
+//     const std::string file_name = "exdata.csv";
+//     FileHandler file(file_name);
+//
+//     // Use file.get_fd() to access the file descriptor
+//     int fd = file.get_fd();
+//     // Rcout << "File descriptor: " << fd << std::endl;
+//     std::cout << "File descriptor: " << fd << std::endl;
+//
+//     off_t size = file.get_fileSize();
+//     // Rcout << "File size: " << size << std::endl;
+//     std::cout << "File size: " << size << std::endl;
+//
+//
+//     // Perform file operations here
+//
+//   } catch (const std::exception& e) {
+//
+//     std::cerr << e.what() << std::endl;
+//   }
+//
+//   return 0;
+// }
 
 
 
