@@ -14,6 +14,7 @@ public:
   off_t get_fileSize() const;
 
 private:
+  std::string filename;
   int fd;
   off_t fileSize;
 

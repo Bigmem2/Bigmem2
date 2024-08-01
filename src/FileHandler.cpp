@@ -10,7 +10,9 @@ using namespace Rcpp;
 
 
 // Constructor that opens the file
-FileHandler(const std::string& filename) {
+FileHandler::FileHandler(const std::string& filename)
+  : filename(filename), fd(-1) {
+
   fd = open(filename.c_str(), O_RDONLY);
   if (fd < 0) {
       throw std::runtime_error("Error opening file: " + filename);
@@ -21,18 +23,18 @@ FileHandler(const std::string& filename) {
 }
 
 // Destructor that closes the file
-~FileHandler() {
+FileHandler::~FileHandler() {
   if (fd >= 0) {
     close(fd);
   }
 }
 
   // Method to get the file descriptor
-int get_fd() const {
+int FileHandler::get_fd() const {
   return fd;
 }
 
-off_t get_fileSize() const {
+off_t FileHandler::get_fileSize() const {
   return fileSize;
 }
 
@@ -42,7 +44,8 @@ int main() {
 
   try {
 
-    FileHandler file("exdata.csv");
+    const std::string file_name = "exdata.csv";
+    FileHandler file(file_name);
 
     // Use file.get_fd() to access the file descriptor
     int fd = file.get_fd();
@@ -65,7 +68,12 @@ int main() {
 
 
 // compile on the fly for testing just this component
-// clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Rcpp/include' -I/opt/R/arm64/include -I/opt/homebrew/opt/llvm/include -Xclang -fopenmp    -I/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Rcpp/include -fPIC  -falign-functions=64 -Wall -g -O2 -o FileHandlerTest src/FileHandler.cpp
+// clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I'/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Rcpp/include' -I/opt/R/arm64/include -I/opt/homebrew/opt/llvm/include -Xclang -fopenmp -I./src -fPIC -falign-functions=64 -Wall -g -O2 -o FileHandlerTest src/FileHandler.cpp -L/Library/Frameworks/R.framework/Resources/lib -lR
+
+// debug:
+// clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I'/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Rcpp/include' -I/opt/R/arm64/include -I/opt/homebrew/opt/llvm/include -Xclang -fopenmp -I./src -fPIC -falign-functions=64 -Wall -g -O2 -o FileHandlerTest src/FileHandler.cpp -L/Library/Frameworks/R.framework/Resources/lib -lR
+// lldb ./FileHandlerTest
+
 // run with: ./FileHandlerTest
 // remove: rm FileHandlerTest
 
