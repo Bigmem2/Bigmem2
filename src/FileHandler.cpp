@@ -19,6 +19,10 @@ FileHandler::FileHandler(const std::string& filename)
   }
 
   fileSize = lseek(fd, 0, SEEK_END);
+  if (fileSize == (off_t) -1) {
+    close(fd);
+    throw std::runtime_error("Error getting file size: " + filename);
+  }
 
 }
 
@@ -49,10 +53,12 @@ int main() {
 
     // Use file.get_fd() to access the file descriptor
     int fd = file.get_fd();
-    Rcout << "File descriptor: " << fd << std::endl;
+    // Rcout << "File descriptor: " << fd << std::endl;
+    std::cout << "File descriptor: " << fd << std::endl;
 
     off_t size = file.get_fileSize();
-    Rcout << "File size: " << size << std::endl;
+    // Rcout << "File size: " << size << std::endl;
+    std::cout << "File size: " << size << std::endl;
 
 
     // Perform file operations here
@@ -69,13 +75,9 @@ int main() {
 
 // compile on the fly for testing just this component
 // clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I'/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Rcpp/include' -I/opt/R/arm64/include -I/opt/homebrew/opt/llvm/include -Xclang -fopenmp -I./src -fPIC -falign-functions=64 -Wall -g -O2 -o FileHandlerTest src/FileHandler.cpp -L/Library/Frameworks/R.framework/Resources/lib -lR
-
-// debug:
-// clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I'/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Rcpp/include' -I/opt/R/arm64/include -I/opt/homebrew/opt/llvm/include -Xclang -fopenmp -I./src -fPIC -falign-functions=64 -Wall -g -O2 -o FileHandlerTest src/FileHandler.cpp -L/Library/Frameworks/R.framework/Resources/lib -lR
-// lldb ./FileHandlerTest
-
-// run with: ./FileHandlerTest
+// run: ./FileHandlerTest
 // remove: rm FileHandlerTest
+
 
 
 
