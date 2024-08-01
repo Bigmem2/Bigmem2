@@ -4,6 +4,7 @@
 #include <Rcpp.h>
 #include "MTDataFrame.h"
 #include "MTSubTable.h"
+#include "FileHandler.h"
 using namespace Rcpp;
 
 

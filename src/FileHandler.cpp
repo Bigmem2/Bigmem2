@@ -4,6 +4,8 @@
 #include <string>
 #include <stdexcept>
 #include <iostream>
+#include <sys/types.h>
+#include "FileHandler.h"
 
 class FileHandler {
 public:
@@ -48,3 +50,16 @@ private:
 //
 //   return 0;
 // }
+
+
+
+// compile on the fly for testing just this component
+// g++ -o FileHandlerTest FileHandler.cpp
+// gcc?
+// run with: ./FileHandlerTest
+// remove: rm FileHandlerTest
+
+
+
+
+

@@ -3,6 +3,7 @@
 
 #include <Rcpp.h>
 #include <string>
+#include <sys/types.h>
 
 class FileHandler {
 
@@ -13,6 +14,7 @@ public:
 
 private:
   int fd;
+  off_t fileSize;
 
 };
 
