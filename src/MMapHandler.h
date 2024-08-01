@@ -5,9 +5,6 @@
 #include "FileHandler.h"
 
 class MMapHandler {
-private:
-FileHandler file;
-
 
 
 public:
@@ -15,6 +12,11 @@ public:
 
 
 // read binary data function
+
+
+
+private:
+  FileHandler file;
 
 
 
