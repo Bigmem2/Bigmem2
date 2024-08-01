@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 #include <fcntl.h>  // For open()
 #include <unistd.h> // For close()
 #include <string>
