@@ -11,6 +11,7 @@ public:
   FileHandler(const std::string& filename);
   ~FileHandler();
   int get_fd() const;
+  off_t get_fileSize() const;
 
 private:
   int fd;
