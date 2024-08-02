@@ -4,15 +4,19 @@
 #include <Rcpp.h>
 #include "MTDataFrame.h"
 #include "MTSubTable.h"
+#include "FileHandler.h"
 using namespace Rcpp;
 
 
 class MTTable {
 private:
+  std::string filepath;
+
   std::vector<int> x;
   std::vector<int> y;
   std::vector<std::string> filepath;
   std::string source_filepath;
+  std::vector<MTSubTable> loaded_subtables;
 
 public:
   using DataType = std::variant<std::string, double, int>;
