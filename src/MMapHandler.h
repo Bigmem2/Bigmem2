@@ -16,7 +16,13 @@ MMapHandler(const std::string& filename);
 ~MMapHandler();
 
 
-const char* get_fileData_ptr() const;
+const char* get_fileData() const;
+
+const void* get_fileData_ptr() const;
+
+std::string get_range(off_t start, off_t end) const;
+
+FileHandler& get_file();
 
 // read raw data function
 // read binary data function

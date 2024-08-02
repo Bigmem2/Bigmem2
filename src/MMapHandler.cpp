@@ -23,9 +23,25 @@ MMapHandler::~MMapHandler() {
 }
 
 
-const char* MMapHandler::get_fileData_ptr() const {
+const char* MMapHandler::get_fileData() const {
 
   return static_cast<const char*>(fileData_ptr);
+}
+
+const void* MMapHandler::get_fileData_ptr() const {
+
+  return fileData_ptr;
+}
+
+std::string MMapHandler::get_range(off_t start, off_t end) const {
+
+  const char* data_start = static_cast<const char*>(fileData_ptr) + start;
+  return std::string(data_start, end - start);
+}
+
+FileHandler& MMapHandler::get_file() {
+
+  return file;
 }
 
 // read raw data function
@@ -40,6 +56,15 @@ int main() {
 
     MMapHandler mmap_handler(file_name);
 
+    // print mmap data and pointer pointer to file
+    std::cout << "MMap pointer to file: " << mmap_handler.get_fileData_ptr() << std::endl;
+    std::cout << "MMap file contents: " << mmap_handler.get_fileData() << std::endl;
+
+    // check file parameters, get number of bytes
+
+
+    // map a range into RAM
+
 
 
   } catch(const std::exception& e) {
@@ -49,7 +74,7 @@ int main() {
 }
 
 // compile on the fly for testing just this component
-// clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I'/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Rcpp/include' -I/opt/R/arm64/include -I/opt/homebrew/opt/llvm/include -Xclang -fopenmp -I./src -fPIC -falign-functions=64 -Wall -g -O2 -o MMapHandlerTest src/MMapHandler.cpp -L/Library/Frameworks/R.framework/Resources/lib -lR
+// clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I'/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Rcpp/include' -I/opt/R/arm64/include -I/opt/homebrew/opt/llvm/include -Xclang -fopenmp -I./src -fPIC -falign-functions=64 -Wall -g -O2 -o MMapHandlerTest src/FileHandler.cpp src/MMapHandler.cpp -L/Library/Frameworks/R.framework/Resources/lib -lR
 
 // run: ./MMapHandlerTest
 // remove: rm MMapHandlerTest
