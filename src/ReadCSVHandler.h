@@ -22,7 +22,7 @@ private:
   off_t file_size;
   off_t chunk_size;
   off_t chunk_position;
-  void* ptr_location;
+  const char* ptr_location;
   std::string str_data_chunk;
 
 

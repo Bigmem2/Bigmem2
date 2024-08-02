@@ -10,13 +10,17 @@ ReadCSVHandler::ReadCSVHandler(const std::string& filename, off_t chunk_size)
 
   file_size = mmap_hdlr.get_file().get_fileSize();
 
-  ptr_location = mmap_hdlr.get_fileData_ptr();
+  ptr_location = static_cast<const char*>(mmap_hdlr.get_fileData_ptr());
 }
 
 std::string& next_chunk() {
 
   // use ptr_location and mmap and chunk_size to fill str_data_chunk with new data
-  if( current < file_size ) {
+  if( chunk_position < file_size ) {
+
+    off_t read_length = std::min(chunk_size, file_size - chunk_position);
+    const char* chunk_start = ptr_location + chunk_position;
+    str_data_chunk = mmap_hdlr.get_range(ptr_location, chunk_start + read_length);
 
   }
 
