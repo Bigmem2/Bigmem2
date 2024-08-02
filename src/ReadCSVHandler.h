@@ -15,11 +15,13 @@ ReadCSVHandler(const std::string& filename, off_t chunk_size);
 ~ReadCSVHandler();
 
 
-
+std::string& next_chunk();
 
 private:
   MMapHandler mmap_hdlr;
+  off_t file_size;
   off_t chunk_size;
+  off_t chunk_position;
   void* ptr_location;
   std::string str_data_chunk;
 
