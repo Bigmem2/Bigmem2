@@ -61,10 +61,11 @@ int main() {
     std::cout << "MMap file contents: " << mmap_handler.get_fileData() << std::endl;
 
     // check file parameters, get number of bytes
-
+    std::cout << "File descriptor: " << mmap_handler.get_file().get_fd() << std::endl;
+    std::cout << "File size: " << mmap_handler.get_file().get_fileSize() << std::endl;
 
     // map a range into RAM
-
+    std::cout << "Portion of file: " << mmap_handler.get_range(50, 51) << std::endl;
 
 
   } catch(const std::exception& e) {
