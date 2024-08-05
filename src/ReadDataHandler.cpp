@@ -4,7 +4,7 @@
 #include "MTSubTable.h"
 #include "ReadCSVHandler.h"
 
-ReadCSVHandler::ReadCSVHandler(const std::string& filename, off_t chunk_size)
+ReadDataHandler::ReadDataHandler(const std::string& filename, off_t chunk_size)
   : mmap_hdlr(filename), chunk_size(chunk_size), chunk_position(chunk_position),
     str_data_chunk(""),  {
 

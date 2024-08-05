@@ -10,9 +10,9 @@ class ReadCSVHandler {
 
 public:
 
-ReadCSVHandler(const std::string& filename, off_t chunk_size);
+ReadDataHandler(const std::string& filename, off_t chunk_size);
 
-~ReadCSVHandler();
+~ReadDataHandler();
 
 
 std::string& next_chunk();
