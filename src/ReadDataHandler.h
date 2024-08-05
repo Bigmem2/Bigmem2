@@ -4,9 +4,8 @@
 #include <Rcpp.h>
 #include <string>
 #include "MMapHandler.h"
-#include "MTSubTable.h"
 
-class ReadCSVHandler {
+class ReadDataHandler {
 
 public:
 
