@@ -11,7 +11,7 @@ public:
 
 ReadDataHandler(const std::string& filename, off_t chunk_size);
 
-~ReadDataHandler();
+// ~ReadDataHandler();
 
 
 std::string& next_chunk();
@@ -20,8 +20,9 @@ private:
   MMapHandler mmap_hdlr;
   off_t file_size;
   off_t chunk_size;
-  off_t chunk_position;
-  const char* ptr_location;
+  // off_t chunk_position;
+  off_t ptr_location;
+  const char* ptr_file_start;
   std::string str_data_chunk;
 
 

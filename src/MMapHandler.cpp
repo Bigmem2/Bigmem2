@@ -48,31 +48,31 @@ FileHandler& MMapHandler::get_file() {
 // read binary data function
 
 // test examples in cpp
-int main() {
-
-  try {
-
-    const std::string file_name = "exdata.csv";
-
-    MMapHandler mmap_handler(file_name);
-
-    // print mmap data and pointer pointer to file
-    std::cout << "MMap pointer to file: " << mmap_handler.get_fileData_ptr() << std::endl;
-    std::cout << "MMap file contents: " << mmap_handler.get_fileData() << std::endl;
-
-    // check file parameters, get number of bytes
-    std::cout << "File descriptor: " << mmap_handler.get_file().get_fd() << std::endl;
-    std::cout << "File size: " << mmap_handler.get_file().get_fileSize() << std::endl;
-
-    // map a range into RAM
-    std::cout << "Portion of file: " << mmap_handler.get_range(50, 51) << std::endl;
-
-
-  } catch(const std::exception& e) {
-
-    std::cerr << e.what() << std::endl;
-  }
-}
+// int main() {
+//
+//   try {
+//
+//     const std::string file_name = "exdata.csv";
+//
+//     MMapHandler mmap_handler(file_name);
+//
+//     // print mmap data and pointer pointer to file
+//     std::cout << "MMap pointer to file: " << mmap_handler.get_fileData_ptr() << std::endl;
+//     std::cout << "MMap file contents: " << mmap_handler.get_fileData() << std::endl;
+//
+//     // check file parameters, get number of bytes
+//     std::cout << "File descriptor: " << mmap_handler.get_file().get_fd() << std::endl;
+//     std::cout << "File size: " << mmap_handler.get_file().get_fileSize() << std::endl;
+//
+//     // map a range into RAM
+//     std::cout << "Portion of file: " << mmap_handler.get_range(50, 51) << std::endl;
+//
+//
+//   } catch(const std::exception& e) {
+//
+//     std::cerr << e.what() << std::endl;
+//   }
+// }
 
 // compile on the fly for testing just this component
 // clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I'/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Rcpp/include' -I/opt/R/arm64/include -I/opt/homebrew/opt/llvm/include -Xclang -fopenmp -I./src -fPIC -falign-functions=64 -Wall -g -O2 -o MMapHandlerTest src/FileHandler.cpp src/MMapHandler.cpp -L/Library/Frameworks/R.framework/Resources/lib -lR
