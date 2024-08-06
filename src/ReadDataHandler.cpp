@@ -27,7 +27,7 @@ std::string& ReadDataHandler::next_chunk() {
 
   } else {
 
-    str_data_chunk = "";
+    str_data_chunk = ""; // could also have it return here, like return "" or something smoother
   }
 
   // update ptr_location and str_data_chunk
@@ -57,7 +57,7 @@ int main() {
     int ctr;
     ctr = 1;
     while(stop != "") {
-      // std::cout << stop << ctr << std::endl;
+      std::cout << ctr << std::endl;
 
       stop = read_data.next_chunk();
       ctr += 1;
