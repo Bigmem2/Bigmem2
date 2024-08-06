@@ -8,7 +8,7 @@ class TransposeDataHandler {
 
 public:
 
-TransposeDataHandler(const std::string& filename, off_t chunk_size)
+TransposeDataHandler(const std::string& filename, off_t chunk_size);
 
 private:
   ReadDataHandler read_data;
