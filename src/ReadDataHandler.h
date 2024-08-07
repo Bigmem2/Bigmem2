@@ -16,6 +16,10 @@ ReadDataHandler(const std::string& filename, off_t chunk_size);
 
 std::string& next_chunk();
 
+off_t get_fileSize();
+
+off_t get_ptrLocation();
+
 private:
   MMapHandler mmap_hdlr;
   off_t file_size;

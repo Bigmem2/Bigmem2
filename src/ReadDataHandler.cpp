@@ -39,6 +39,16 @@ std::string& ReadDataHandler::next_chunk() {
   return str_data_chunk;
 }
 
+off_t ReadDataHandler::get_fileSize() {
+
+  return file_size;
+}
+
+off_t ReadDataHandler::get_ptrLocation() {
+
+  return ptr_location;
+}
+
 
 // test
 int main() {
@@ -49,17 +59,33 @@ int main() {
 
     auto start = std::chrono::high_resolution_clock::now();
 
-    ReadDataHandler read_data("flights.csv", 16000*9);
+    ReadDataHandler read_data("iris.csv", 160);
 
     // std::cout << "Next chunk: " << read_data.next_chunk() << std::endl;
 
     std::string stop = "1";
     int ctr;
     ctr = 1;
+    std::vector<size_t> new_line_pos;
+    off_t starts_here;
+
+    std::cout << "File size: " << read_data.get_fileSize() << std::endl;
+
     while(stop != "") {
-      std::cout << ctr << std::endl;
+      // std::cout << ctr << std::endl;
+
+
+      starts_here = read_data.get_ptrLocation();
 
       stop = read_data.next_chunk();
+
+      // search for metadata for the transformation step (next method)
+      for (size_t i = 0; i < stop.size(); ++i) {
+        if (stop[i] == '\n') {
+          new_line_pos.push_back( starts_here + i );
+        }
+      }
+
       ctr += 1;
     }
 
@@ -69,6 +95,14 @@ int main() {
     auto elapsedSeconds = std::chrono::duration_cast<std::chrono::seconds>(end - start).count();
     std::cout << "Elapsed time in milliseconds: " << elapsedMilliseconds << " ms\n";
     std::cout << "Elapsed time in seconds: " << elapsedSeconds << " s\n";
+
+
+    std::cout << "All new line positions detected: ";
+    for (size_t pos : new_line_pos) {
+      std::cout << pos << " ";
+    }
+    std::cout << "\n";
+
 
     // read some chunks to test the main method, next_chunk()
 
