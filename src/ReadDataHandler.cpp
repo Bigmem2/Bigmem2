@@ -82,7 +82,7 @@ int main() {
       // search for metadata for the transformation step (next method)
       for (size_t i = 0; i < stop.size(); ++i) {
         if (stop[i] == '\n') {
-          new_line_pos.push_back( starts_here + i );
+          new_line_pos.push_back( starts_here + i ); // could we do this in a memory mapped way instead?? just a thought
         }
       }
 
