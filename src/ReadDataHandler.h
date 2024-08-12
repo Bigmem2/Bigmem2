@@ -20,6 +20,8 @@ off_t get_fileSize();
 
 off_t get_ptrLocation();
 
+bool check_chunk_in_range();
+
 private:
   MMapHandler mmap_hdlr;
   off_t file_size;

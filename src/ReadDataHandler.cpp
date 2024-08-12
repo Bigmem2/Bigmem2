@@ -49,6 +49,11 @@ off_t ReadDataHandler::get_ptrLocation() {
   return ptr_location;
 }
 
+bool ReadDataHandler::check_chunk_in_range() {
+
+  return ptr_location < file_size;
+}
+
 
 // test
 int main() {
@@ -71,7 +76,7 @@ int main() {
 
     std::cout << "File size: " << read_data.get_fileSize() << std::endl;
 
-    while(stop != "") {
+    while( read_data.check_chunk_in_range() ) {
       // std::cout << ctr << std::endl;
 
 
