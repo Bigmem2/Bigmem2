@@ -13,7 +13,7 @@ ReadDataHandler::ReadDataHandler(const std::string& filename, off_t chunk_size)
   ptr_location = 0;
 }
 
-std::string& ReadDataHandler::next_chunk() {
+std::string* ReadDataHandler::next_chunk() {
 
   // use ptr_location and mmap and chunk_size to fill str_data_chunk with new data
   if( ptr_location < file_size ) {
@@ -25,18 +25,12 @@ std::string& ReadDataHandler::next_chunk() {
 
     ptr_location += read_length;
 
+    return &str_data_chunk;
+
   } else {
 
-    str_data_chunk = ""; // could also have it return here, like return "" or something smoother
+    return nullptr;
   }
-
-  // update ptr_location and str_data_chunk
-  // do we need to update ptr_location
-  // i think that chunk_position and ptr_location do the same thing. Is that true?
-  // if redundent, eliminate one?
-  // chat gpt agrees - update the file
-
-  return str_data_chunk;
 }
 
 off_t ReadDataHandler::get_fileSize() {
@@ -49,75 +43,75 @@ off_t ReadDataHandler::get_ptrLocation() {
   return ptr_location;
 }
 
-bool ReadDataHandler::check_chunk_in_range() {
+bool ReadDataHandler::chunk_in_range() {
 
   return ptr_location < file_size;
 }
 
 
-// test
-int main() {
-
-  try{
-    // instantiate a new read data handler
-    // off_t bytes = static_cast<off_t>(10);
-
-    auto start = std::chrono::high_resolution_clock::now();
-
-    ReadDataHandler read_data("iris.csv", 160);
-
-    // std::cout << "Next chunk: " << read_data.next_chunk() << std::endl;
-
-    std::string stop = "1";
-    int ctr;
-    ctr = 1;
-    std::vector<size_t> new_line_pos;
-    off_t starts_here;
-
-    std::cout << "File size: " << read_data.get_fileSize() << std::endl;
-
-    while( read_data.check_chunk_in_range() ) {
-      // std::cout << ctr << std::endl;
-
-
-      starts_here = read_data.get_ptrLocation();
-
-      stop = read_data.next_chunk();
-
-      // search for metadata for the transformation step (next method)
-      for (size_t i = 0; i < stop.size(); ++i) {
-        if (stop[i] == '\n') {
-          new_line_pos.push_back( starts_here + i ); // could we do this in a memory mapped way instead?? just a thought
-        }
-      }
-
-      ctr += 1;
-    }
-
-    auto end = std::chrono::high_resolution_clock::now();
-
-    auto elapsedMilliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-    auto elapsedSeconds = std::chrono::duration_cast<std::chrono::seconds>(end - start).count();
-    std::cout << "Elapsed time in milliseconds: " << elapsedMilliseconds << " ms\n";
-    std::cout << "Elapsed time in seconds: " << elapsedSeconds << " s\n";
-
-
-    std::cout << "All new line positions detected: ";
-    for (size_t pos : new_line_pos) {
-      std::cout << pos << " ";
-    }
-    std::cout << "\n";
-
-
-    // read some chunks to test the main method, next_chunk()
-
-  } catch(const std::exception& e) {
-
-    std::cerr << e.what() << std::endl;
-  }
-
-
-}
+// // test
+// int main() {
+//
+//   try{
+//     // instantiate a new read data handler
+//     // off_t bytes = static_cast<off_t>(10);
+//
+//     auto start = std::chrono::high_resolution_clock::now();
+//
+//     ReadDataHandler read_data("transposeit.csv", 160);
+//
+//     // std::cout << "Next chunk: " << read_data.next_chunk() << std::endl;
+//
+//     std::string stop = "1";
+//     int ctr;
+//     ctr = 1;
+//     std::vector<size_t> new_line_pos;
+//     off_t starts_here;
+//
+//     std::cout << "File size: " << read_data.get_fileSize() << std::endl;
+//
+//     while( read_data.chunk_in_range() ) {
+//       // std::cout << ctr << std::endl;
+//
+//
+//       starts_here = read_data.get_ptrLocation();
+//
+//       stop = read_data.next_chunk();
+//
+//       // search for metadata for the transformation step (next method)
+//       for (size_t i = 0; i < stop.size(); ++i) {
+//         if (stop[i] == '\n') {
+//           new_line_pos.push_back( starts_here + i ); // could we do this in a memory mapped way instead?? just a thought
+//         }
+//       }
+//
+//       ctr += 1;
+//     }
+//
+//     auto end = std::chrono::high_resolution_clock::now();
+//
+//     auto elapsedMilliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+//     auto elapsedSeconds = std::chrono::duration_cast<std::chrono::seconds>(end - start).count();
+//     std::cout << "Elapsed time in milliseconds: " << elapsedMilliseconds << " ms\n";
+//     std::cout << "Elapsed time in seconds: " << elapsedSeconds << " s\n";
+//
+//
+//     std::cout << "All new line positions detected: ";
+//     for (size_t pos : new_line_pos) {
+//       std::cout << pos << " ";
+//     }
+//     std::cout << "\n";
+//
+//
+//     // read some chunks to test the main method, next_chunk()
+//
+//   } catch(const std::exception& e) {
+//
+//     std::cerr << e.what() << std::endl;
+//   }
+//
+//
+// }
 
 // compile and run
 

@@ -14,13 +14,13 @@ ReadDataHandler(const std::string& filename, off_t chunk_size);
 // ~ReadDataHandler();
 
 
-std::string& next_chunk();
+std::string* next_chunk();
 
 off_t get_fileSize();
 
 off_t get_ptrLocation();
 
-bool check_chunk_in_range();
+bool chunk_in_range();
 
 private:
   MMapHandler mmap_hdlr;
