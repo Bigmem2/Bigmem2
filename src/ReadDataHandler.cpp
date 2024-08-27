@@ -49,69 +49,80 @@ bool ReadDataHandler::chunk_in_range() {
 }
 
 // test
-int main() {
+// int main() {
+// 
+//   try{
+//     // instantiate a new read data handler
+//     // off_t bytes = static_cast<off_t>(10);
+// 
+//     auto start = std::chrono::high_resolution_clock::now();
+// 
+//     ReadDataHandler read_data("flights.csv", 1600);
+// 
+//     // std::cout << "Next chunk: " << read_data.next_chunk() << std::endl;
+// 
+//     int ctr;
+//     ctr = 1;
+//     std::vector<size_t> new_line_pos;
+//     off_t starts_here;
+// 
+//     std::cout << "File size: " << read_data.get_fileSize() << std::endl;
+//     
+//     std::string* data;
+// 
+//     while( (data = read_data.next_chunk()) != nullptr ) {
+//       // std::cout << *data << std::endl;
+//       
+//       // std::cout << ctr << std::endl;
+//       // starts_here = read_data.get_ptrLocation();
+//       // 
+//       // stop = read_data.next_chunk();
+//       // 
+//       // // search for metadata for the transformation step (next method)
+//       // for (size_t i = 0; i < stop.size(); ++i) {
+//       //   if (stop[i] == '\n') {
+//       //     new_line_pos.push_back( starts_here + i ); // could we do this in a memory mapped way instead?? just a thought
+//       //   }
+//       // }
+//       // 
+//       // ctr += 1;
+//     }
+// 
+//     auto end = std::chrono::high_resolution_clock::now();
+// 
+//     auto elapsedMilliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+//     auto elapsedSeconds = std::chrono::duration_cast<std::chrono::seconds>(end - start).count();
+//     std::cout << "Elapsed time in milliseconds: " << elapsedMilliseconds << " ms\n";
+//     std::cout << "Elapsed time in seconds: " << elapsedSeconds << " s\n";
+// 
+// 
+//     std::cout << "All new line positions detected: ";
+//     for (size_t pos : new_line_pos) {
+//       std::cout << pos << " ";
+//     }
+//     std::cout << "\n";
+// 
+// 
+//     // read some chunks to test the main method, next_chunk()
+// 
+//   } catch(const std::exception& e) {
+// 
+//     std::cerr << e.what() << std::endl;
+//   }
+// 
+// 
+// }
 
-  try{
-    // instantiate a new read data handler
-    // off_t bytes = static_cast<off_t>(10);
-
-    auto start = std::chrono::high_resolution_clock::now();
-
-    ReadDataHandler read_data("flights.csv", 1600);
-
-    // std::cout << "Next chunk: " << read_data.next_chunk() << std::endl;
-
-    int ctr;
-    ctr = 1;
-    std::vector<size_t> new_line_pos;
-    off_t starts_here;
-
-    std::cout << "File size: " << read_data.get_fileSize() << std::endl;
-    
-    std::string* data;
-
-    while( (data = read_data.next_chunk()) != nullptr ) {
-      // std::cout << *data << std::endl;
-      
-      // std::cout << ctr << std::endl;
-      // starts_here = read_data.get_ptrLocation();
-      // 
-      // stop = read_data.next_chunk();
-      // 
-      // // search for metadata for the transformation step (next method)
-      // for (size_t i = 0; i < stop.size(); ++i) {
-      //   if (stop[i] == '\n') {
-      //     new_line_pos.push_back( starts_here + i ); // could we do this in a memory mapped way instead?? just a thought
-      //   }
-      // }
-      // 
-      // ctr += 1;
-    }
-
-    auto end = std::chrono::high_resolution_clock::now();
-
-    auto elapsedMilliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-    auto elapsedSeconds = std::chrono::duration_cast<std::chrono::seconds>(end - start).count();
-    std::cout << "Elapsed time in milliseconds: " << elapsedMilliseconds << " ms\n";
-    std::cout << "Elapsed time in seconds: " << elapsedSeconds << " s\n";
 
 
-    std::cout << "All new line positions detected: ";
-    for (size_t pos : new_line_pos) {
-      std::cout << pos << " ";
-    }
-    std::cout << "\n";
 
 
-    // read some chunks to test the main method, next_chunk()
-
-  } catch(const std::exception& e) {
-
-    std::cerr << e.what() << std::endl;
-  }
 
 
-}
+
+
+
+
 
 
 // // old test

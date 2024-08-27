@@ -9,25 +9,46 @@ TransposeDataHandler::TransposeDataHandler(const std::string& filename, off_t ch
 
 
 TransposeDataHandler::index_words() {
-
-  off_t read_position = 0;
-  // std::string chunk_of_data;
-
-  while( auto ptr = read_data.next_chunk() ) {
-
-    chunk_of_data = *ptr;
-
-    for( size_t i = 0; i < chunk_of_data.size(); ++i) {
-
-      if( chunk_of_data[i] == "," ) {
-
-        word_starts.push_back( read_position + i + 1 );
+  
+  std::string* chunkPtr;
+  
+  int total_commas = 0;
+  
+  while( chunkPtr = read_data.next_chunk() != nullptr ) {
+    
+    
+    
+    for(size_t i = 0; i < chunkPtr->size(); ++i) {
+      
+      if( (*chunkPtr)[i] == "," ) {
+        
+        total_commas += 1;
       }
-
     }
-
-    read_position = read_data.get_ptrLocation();
+    
   }
+  
+  std::cout << total_commas << std::endl;
+  
+
+  // off_t read_position = 0;
+  // // std::string chunk_of_data;
+  // 
+  // while( auto ptr = read_data.next_chunk() ) {
+  // 
+  //   chunk_of_data = *ptr;
+  // 
+  //   for( size_t i = 0; i < chunk_of_data.size(); ++i) {
+  // 
+  //     if( chunk_of_data[i] == "," ) {
+  // 
+  //       word_starts.push_back( read_position + i + 1 );
+  //     }
+  // 
+  //   }
+  // 
+  //   read_position = read_data.get_ptrLocation();
+  // }
 
 }
 
