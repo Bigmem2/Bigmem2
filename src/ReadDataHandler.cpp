@@ -57,7 +57,7 @@ int main() {
 
     auto start = std::chrono::high_resolution_clock::now();
 
-    ReadDataHandler read_data("transposeit.csv", 160);
+    ReadDataHandler read_data("flights.csv", 1600);
 
     // std::cout << "Next chunk: " << read_data.next_chunk() << std::endl;
 
@@ -71,7 +71,8 @@ int main() {
     std::string* data;
 
     while( (data = read_data.next_chunk()) != nullptr ) {
-      std::cout << data << std::endl;
+      // std::cout << *data << std::endl;
+      
       // std::cout << ctr << std::endl;
       // starts_here = read_data.get_ptrLocation();
       // 
@@ -184,7 +185,7 @@ int main() {
 // clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I'/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Rcpp/include' -I/opt/R/arm64/include -I/opt/homebrew/opt/llvm/include -Xclang -fopenmp -I./src -fPIC -falign-functions=64 -Wall -g -O2 -o ReadDataHandlerTest src/FileHandler.cpp src/MMapHandler.cpp src/ReadDataHandler.cpp -L/Library/Frameworks/R.framework/Resources/lib -lR
 
 // on linux rstudio server container:
-// clang++ -std=gnu++17 -I"/usr/local/lib/R/include" -DNDEBUG -I'/usr/local/lib/R/site-library/Rcpp/include' -I/usr/lib/llvm-10/include -fopenmp -I./src -fPIC -Wall -g -O2 -o ReadDataHandlerTest src/FileHandler.cpp src/MMapHandler.cpp src/ReadDataHandler.cpp -L/usr/local/lib/R/library -lR
+// clang++ -std=gnu++17 -I"/usr/local/lib/R/include" -DNDEBUG -I'/usr/local/lib/R/site-library/Rcpp/include' -I/usr/lib/llvm-10/include -fopenmp -I./src -fPIC -Wall -g -O2 -o ReadDataHandlerTest src/FileHandler.cpp src/MMapHandler.cpp src/ReadDataHandler.cpp -L/usr/local/lib/R/lib -lR
 
 // run: ./ReadDataHandlerTest
 // remove: rm ReadDataHandlerTest
