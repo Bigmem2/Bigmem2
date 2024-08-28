@@ -73,6 +73,11 @@ bool ReadDataHandler::chunk_in_range() {
   return ptr_location < file_size;
 }
 
+void ReadDataHandler::reset() {
+  
+  this->ptr_location = 0;
+}
+
 // test
 // int main() {
 // 

@@ -26,6 +26,8 @@ off_t get_chunkSize();
 
 bool chunk_in_range();
 
+void reset();
+
 private:
   MMapHandler mmap_hdlr;
   off_t file_size;

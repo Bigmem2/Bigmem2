@@ -13,7 +13,7 @@ void TransposeDataHandler::ncol() {
   
   std::string* chunkPtr;
   
-  int ncol = 0;
+  int ncol = 1;
   
   bool inFirstRow = true;
   
@@ -35,6 +35,8 @@ void TransposeDataHandler::ncol() {
     
   }
   
+  read_data.reset();
+  
   std::cout << ncol << std::endl;
 
 }
@@ -45,33 +47,43 @@ void TransposeDataHandler::nrow() {
   
   int nrow = 0;
   
-  off_t ptr_location;
+  // off_t ptr_location;
 
   while( (chunkPtr = read_data.next_chunk()) != nullptr ) {
+    
+    std::cout << "Data: " << *chunkPtr << std::endl;
     
     for(size_t i = 0; i < chunkPtr->size(); ++i) {
       
       char element = (*chunkPtr)[i];
       
+      std::cout << element << std::endl;
+      
+      if (element == '\n') {
+        std::cout << "<NL>";  // Optionally mark where newlines occur
+      }
+      
       if(element == '\n') {
         
-        nrow += 1;
+        nrow++;
       }
     }
     
-    ptr_location = read_data.get_ptrLocation();
+    // ptr_location = read_data.get_ptrLocation();
   }
   
   // std::cout << ptr_location << std::endl;
   
-  std::string* last_chunk = read_data.get_chunk(ptr_location - read_data.get_chunkSize());
+  // std::string* last_chunk = read_data.get_chunk(ptr_location - read_data.get_chunkSize());
   
   // std::cout << *last_chunk << std::endl;
   
-  if( (*last_chunk)[last_chunk->size() - 1] == '\n' ) {
-
-    nrow -= 1;
-  }
+  // if( (*last_chunk)[last_chunk->size() - 1] != '\n' ) {
+  // 
+  //   nrow += 1;
+  // }
+  
+  read_data.reset();
   
   std::cout << nrow << std::endl;
 }
@@ -103,7 +115,7 @@ void TransposeDataHandler::nrow() {
 int main() {
   try {
     
-    TransposeDataHandler data("flights.csv", 1600);
+    TransposeDataHandler data("exdata.csv", 1600);
     
     auto start = std::chrono::high_resolution_clock::now();
     
