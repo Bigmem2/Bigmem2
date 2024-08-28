@@ -33,6 +33,26 @@ std::string* ReadDataHandler::next_chunk() {
   }
 }
 
+std::string* ReadDataHandler::get_chunk(off_t ptr_start) {
+  
+  // use ptr_location and mmap and chunk_size to fill str_data_chunk with new data
+  if( ptr_start < file_size ) {
+    
+    off_t read_length = std::min(chunk_size, file_size - ptr_start);
+    
+    // const char* chunk_start = ptr_file_start + ptr_location;
+    str_data_chunk = mmap_hdlr.get_range(ptr_start, ptr_start + read_length);
+    
+    ptr_start += read_length;
+    
+    return &str_data_chunk;
+    
+  } else {
+    
+    return nullptr;
+  }
+}
+
 off_t ReadDataHandler::get_fileSize() {
 
   return file_size;
@@ -41,6 +61,11 @@ off_t ReadDataHandler::get_fileSize() {
 off_t ReadDataHandler::get_ptrLocation() {
 
   return ptr_location;
+}
+
+off_t ReadDataHandler::get_chunkSize() {
+  
+  return chunk_size;
 }
 
 bool ReadDataHandler::chunk_in_range() {

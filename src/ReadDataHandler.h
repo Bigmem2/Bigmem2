@@ -16,9 +16,13 @@ ReadDataHandler(const std::string& filename, off_t chunk_size);
 
 std::string* next_chunk();
 
+std::string* get_chunk(off_t ptr_start);
+
 off_t get_fileSize();
 
 off_t get_ptrLocation();
+
+off_t get_chunkSize();
 
 bool chunk_in_range();
 
