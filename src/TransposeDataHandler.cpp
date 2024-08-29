@@ -165,7 +165,7 @@ void TransposeDataHandler::fill_wordTable() {
       if(element == ',') {
         
         wordTable[col_position][row_position] = wrd_ct;
-        wordStartsTable[col_position][row_position] = byte_pos;
+        wordStartsTable[col_position][row_position] = byte_pos - wrd_ct;
         
         col_position++;
         
@@ -177,7 +177,7 @@ void TransposeDataHandler::fill_wordTable() {
       if( (element == '\n') ) { //| (row_position == n_row - 1) 
         
         wordTable[col_position][row_position] = wrd_ct;
-        wordStartsTable[col_position][row_position] = byte_pos;
+        wordStartsTable[col_position][row_position] = byte_pos - wrd_ct;
         
         row_position++;
         
