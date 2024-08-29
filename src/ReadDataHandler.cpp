@@ -23,8 +23,10 @@ std::string* ReadDataHandler::next_chunk() {
     // const char* chunk_start = ptr_file_start + ptr_location;
     str_data_chunk = mmap_hdlr.get_range(ptr_location, ptr_location + read_length);
 
+    prev_ptr_location = ptr_location;
+    
     ptr_location += read_length;
-
+    
     return &str_data_chunk;
 
   } else {
@@ -61,6 +63,11 @@ off_t ReadDataHandler::get_fileSize() {
 off_t ReadDataHandler::get_ptrLocation() {
 
   return ptr_location;
+}
+
+off_t ReadDataHandler::get_prev_ptrLocation() {
+  
+  return prev_ptr_location;
 }
 
 off_t ReadDataHandler::get_chunkSize() {

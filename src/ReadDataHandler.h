@@ -22,6 +22,8 @@ off_t get_fileSize();
 
 off_t get_ptrLocation();
 
+off_t get_prev_ptrLocation();
+
 off_t get_chunkSize();
 
 bool chunk_in_range();
@@ -34,6 +36,7 @@ private:
   off_t chunk_size;
   // off_t chunk_position;
   off_t ptr_location;
+  off_t prev_ptr_location;
   const char* ptr_file_start;
   std::string str_data_chunk;
 

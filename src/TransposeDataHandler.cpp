@@ -6,14 +6,17 @@ TransposeDataHandler::TransposeDataHandler(const std::string& filename, off_t ch
   : read_data(filename, chunk_size), word_starts({0}), cumsum_starts({0}) {
 
   this->chunk_size = chunk_size;
+  this->n_row = this->ncol();
+  this->n_col = this->nrow();
+
 }
 
 
-void TransposeDataHandler::ncol() {
+int TransposeDataHandler::ncol() {
+  
+  n_col = 1;
   
   std::string* chunkPtr;
-  
-  int ncol = 1;
   
   bool inFirstRow = true;
   
@@ -25,11 +28,13 @@ void TransposeDataHandler::ncol() {
       
       if( inFirstRow && element == ',' ) {
         
-        ncol += 1;
+        n_col += 1;
         
       } else if( element == '\n' ) {
         
         inFirstRow = false;
+        
+        break;
       }
     }
     
@@ -37,55 +42,44 @@ void TransposeDataHandler::ncol() {
   
   read_data.reset();
   
-  std::cout << ncol << std::endl;
+  std::cout << n_col << std::endl;
+  
+  return n_col;
 
 }
 
-void TransposeDataHandler::nrow() {
+int TransposeDataHandler::nrow() {
+  
+  n_row = 0;
   
   std::string* chunkPtr;
-  
-  int nrow = 0;
-  
-  // off_t ptr_location;
 
-  while( (chunkPtr = read_data.next_chunk()) != nullptr ) {
-    
-    std::cout << "Data: " << *chunkPtr << std::endl;
+  while( ( chunkPtr = read_data.next_chunk()) != nullptr ) {
     
     for(size_t i = 0; i < chunkPtr->size(); ++i) {
       
       char element = (*chunkPtr)[i];
       
-      std::cout << element << std::endl;
-      
-      if (element == '\n') {
-        std::cout << "<NL>";  // Optionally mark where newlines occur
-      }
-      
       if(element == '\n') {
         
-        nrow++;
+        n_row++;
       }
     }
-    
-    // ptr_location = read_data.get_ptrLocation();
   }
   
-  // std::cout << ptr_location << std::endl;
+  std::string* last_chunk = read_data.get_chunk(read_data.get_prev_ptrLocation());
   
-  // std::string* last_chunk = read_data.get_chunk(ptr_location - read_data.get_chunkSize());
-  
-  // std::cout << *last_chunk << std::endl;
-  
-  // if( (*last_chunk)[last_chunk->size() - 1] != '\n' ) {
-  // 
-  //   nrow += 1;
-  // }
+  if( (*last_chunk)[last_chunk->size() - 1] != '\n' ) {
+
+    n_row += 1;
+  }
   
   read_data.reset();
   
-  std::cout << nrow << std::endl;
+  std::cout << n_row << std::endl;
+  
+  return n_row;
+
 }
 
 // void TransposeDataHandler::push_wordlengths() {
@@ -115,13 +109,9 @@ void TransposeDataHandler::nrow() {
 int main() {
   try {
     
-    TransposeDataHandler data("exdata.csv", 1600);
-    
     auto start = std::chrono::high_resolution_clock::now();
-    
-    data.ncol();
-    
-    data.nrow();
+//3650722816/50
+    TransposeDataHandler data("../big_data.csv", 100*2^20);
     
     auto end = std::chrono::high_resolution_clock::now();
     
@@ -143,16 +133,31 @@ int main() {
 
 
 
-// old, not working
-// compile on the fly for testing just this component
-// clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I'/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Rcpp/include' -I/opt/R/arm64/include -I/opt/homebrew/opt/llvm/include -Xclang -fopenmp -I./src -fPIC -falign-functions=64 -Wall -g -O2 -o TransposeDataHandlerTest src/FileHandler.cpp src/MMapHandler.cpp src/ReadDataHandler.cpp src/TransposeDataHandler.cpp -L/Library/Frameworks/R.framework/Resources/lib -lR
-
 
 // new, working
 // on linux rstudio server container:
-// clang++ -std=gnu++17 -I"/usr/local/lib/R/include" -DNDEBUG -I'/usr/local/lib/R/site-library/Rcpp/include' -I/usr/lib/llvm-10/include -fopenmp -I./src -fPIC -Wall -g -O2 -o TransponseDataHandlerTest src/FileHandler.cpp src/MMapHandler.cpp src/ReadDataHandler.cpp src/TransposeDataHandler.cpp -L/usr/local/lib/R/lib -lR
+// g++ -O3 -march=native -mtune=native -ffast-math -flto -funroll-loops -fomit-frame-pointer -std=gnu++17 -I"/usr/local/lib/R/include" -DNDEBUG -I'/usr/local/lib/R/site-library/Rcpp/include' -I/usr/lib/llvm-10/include -fopenmp -I./src -fPIC -Wall -g -O2 -o TransponseDataHandlerTest src/FileHandler.cpp src/MMapHandler.cpp src/ReadDataHandler.cpp src/TransposeDataHandler.cpp -L/usr/local/lib/R/lib -lR
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// old, not working
+// compile on the fly for testing just this component
+// clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I'/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Rcpp/include' -I/opt/R/arm64/include -I/opt/homebrew/opt/llvm/include -Xclang -fopenmp -I./src -fPIC -falign-functions=64 -Wall -g -O2 -o TransposeDataHandlerTest src/FileHandler.cpp src/MMapHandler.cpp src/ReadDataHandler.cpp src/TransposeDataHandler.cpp -L/Library/Frameworks/R.framework/Resources/lib -lR
 
 
 

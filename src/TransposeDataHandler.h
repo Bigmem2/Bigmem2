@@ -11,8 +11,8 @@ public:
 
 TransposeDataHandler(const std::string& filename, off_t chunk_size);
 
-void ncol();
-void nrow();
+int ncol();
+int nrow();
 
 void sort_words();
 
@@ -22,6 +22,8 @@ private:
   ReadDataHandler read_data;
   std::vector<int> word_starts;
   std::vector<int> cumsum_starts;
+  int n_col;
+  int n_row;
   // const std::string& chunk_of_data;
 
 };
