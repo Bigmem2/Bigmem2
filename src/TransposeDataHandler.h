@@ -14,6 +14,10 @@ TransposeDataHandler(const std::string& filename, off_t chunk_size);
 int ncol();
 int nrow();
 
+void pre_alloc_wordTable();
+
+void fill_wordTable();
+
 void sort_words();
 
 private:
@@ -24,6 +28,7 @@ private:
   std::vector<int> cumsum_starts;
   int n_col;
   int n_row;
+  std::vector<std::vector<int>> wordTable;
   // const std::string& chunk_of_data;
 
 };

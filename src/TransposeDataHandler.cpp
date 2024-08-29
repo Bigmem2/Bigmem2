@@ -6,8 +6,14 @@ TransposeDataHandler::TransposeDataHandler(const std::string& filename, off_t ch
   : read_data(filename, chunk_size), word_starts({0}), cumsum_starts({0}) {
 
   this->chunk_size = chunk_size;
-  this->n_row = this->ncol();
-  this->n_col = this->nrow();
+  
+  // this->read_data.get_chunk(0);
+  // this->read_data.get_chunk(0);
+  
+  this->n_row = this->nrow();
+  this->n_col = this->ncol();
+  
+  pre_alloc_wordTable();
 
 }
 
@@ -80,6 +86,45 @@ int TransposeDataHandler::nrow() {
   
   return n_row;
 
+}
+
+void TransposeDataHandler::pre_alloc_wordTable() {
+  
+  wordTable.resize(n_col);
+  
+  for(auto& column : wordTable) {
+
+    column.resize(n_row);
+  }
+}
+
+void TransposeDataHandler::fill_wordTable() {
+  
+  std::string* chunkPtr;
+  
+  int wrd_ct = 0;
+  
+  int row_position = 0;
+  int col_position = 0;
+  
+  while( ( chunkPtr = read_data.next_chunk() ) != nullptr ) {
+    
+    for(size_t i = 0; i < chunkPtr->size(); ++i) {
+      
+      if(element == '\n') {
+        
+        row_position = 0;
+      }
+      
+      char element = (*chunkPtr)[i];
+      
+      if(element == ',') {
+        
+        wordTable[col_position][row_position] = wrd_ct;
+        col_position++;
+      }
+    }
+  }
 }
 
 // void TransposeDataHandler::push_wordlengths() {
