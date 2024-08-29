@@ -18,6 +18,8 @@ void pre_alloc_wordTable();
 
 void fill_wordTable();
 
+void transpose(std::vector<std::vector<int>>* table);
+
 void sort_words();
 
 private:
@@ -29,6 +31,7 @@ private:
   int n_col;
   int n_row;
   std::vector<std::vector<int>> wordTable;
+  std::vector<std::vector<int>> wordStartsTable;
   // const std::string& chunk_of_data;
 
 };

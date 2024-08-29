@@ -14,6 +14,47 @@ TransposeDataHandler::TransposeDataHandler(const std::string& filename, off_t ch
   this->n_col = this->ncol();
   
   pre_alloc_wordTable();
+  
+  fill_wordTable();
+  
+  std::cout << "Contents of wordTable:" << std::endl;
+  for (const auto& row : wordTable) {
+    for (const int& value : row) {
+      std::cout << value << "\t";  // Use tab to separate columns
+    }
+    std::cout << std::endl;  // New line after each row
+  }
+  
+  std::cout << std::endl; 
+  
+  std::cout << "Contents of wordStartsTable:" << std::endl;
+  for (const auto& row : wordStartsTable) {
+    for (const int& value : row) {
+      std::cout << value << "\t";  // Use tab to separate columns
+    }
+    std::cout << std::endl;  // New line after each row
+  }
+  
+  transpose(&wordTable);
+  transpose(&wordStartsTable);
+  
+  std::cout << "Contents of wordTable transposed:" << std::endl;
+  for (const auto& row : wordTable) {
+    for (const int& value : row) {
+      std::cout << value << "\t";  // Use tab to separate columns
+    }
+    std::cout << std::endl;  // New line after each row
+  }
+  
+  std::cout << std::endl; 
+  
+  std::cout << "Contents of wordStartsTable transposed:" << std::endl;
+  for (const auto& row : wordStartsTable) {
+    for (const int& value : row) {
+      std::cout << value << "\t";  // Use tab to separate columns
+    }
+    std::cout << std::endl;  // New line after each row
+  }
 
 }
 
@@ -96,12 +137,20 @@ void TransposeDataHandler::pre_alloc_wordTable() {
 
     column.resize(n_row);
   }
+  
+  wordStartsTable.resize(n_col);
+  
+  for(auto& column : wordStartsTable) {
+    
+    column.resize(n_row);
+  }
 }
 
 void TransposeDataHandler::fill_wordTable() {
   
   std::string* chunkPtr;
   
+  int byte_pos = 0;
   int wrd_ct = 0;
   
   int row_position = 0;
@@ -111,20 +160,55 @@ void TransposeDataHandler::fill_wordTable() {
     
     for(size_t i = 0; i < chunkPtr->size(); ++i) {
       
-      if(element == '\n') {
-        
-        row_position = 0;
-      }
-      
       char element = (*chunkPtr)[i];
       
       if(element == ',') {
         
         wordTable[col_position][row_position] = wrd_ct;
+        wordStartsTable[col_position][row_position] = byte_pos;
+        
         col_position++;
+        
+        byte_pos++;
+        wrd_ct = 0;
+        continue;
       }
+      
+      if( (element == '\n') ) { //| (row_position == n_row - 1) 
+        
+        wordTable[col_position][row_position] = wrd_ct;
+        wordStartsTable[col_position][row_position] = byte_pos;
+        
+        row_position++;
+        
+        byte_pos++;
+        col_position = 0;
+        wrd_ct = 0;
+        continue;
+      }
+      
+      byte_pos++;
+      wrd_ct++;
     }
   }
+}
+
+void TransposeDataHandler::transpose(std::vector<std::vector<int>>* table) {
+  
+  size_t table_rows = table->size();
+  size_t table_cols = (*table)[0].size();
+  
+  std::vector<std::vector<int>> table_tranp(table_cols, std::vector<int>(table_rows));
+  
+  for(size_t i = 0; i < static_cast<size_t>(n_row); ++i) {
+    
+    for(size_t j = 0; j < static_cast<size_t>(n_col); ++j) {
+      
+      table_tranp[j][i] = (*table)[i][j];
+    }
+  }
+  
+  *table = std::move(table_tranp);
 }
 
 // void TransposeDataHandler::push_wordlengths() {
@@ -156,7 +240,7 @@ int main() {
     
     auto start = std::chrono::high_resolution_clock::now();
 //3650722816/50
-    TransposeDataHandler data("../big_data.csv", 100*2^20);
+    TransposeDataHandler data("exdata.csv", 100*2^20);
     
     auto end = std::chrono::high_resolution_clock::now();
     
