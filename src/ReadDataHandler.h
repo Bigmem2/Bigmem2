@@ -26,6 +26,8 @@ off_t get_prev_ptrLocation();
 
 off_t get_chunkSize();
 
+void set_chunkSize(off_t size);
+
 bool chunk_in_range();
 
 void reset();

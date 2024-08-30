@@ -17,7 +17,7 @@ void write_transpose();
   
 private:
   MMapWriteHandler writer;
-  ReadDataHandler source_data;
+  //ReadDataHandler source_data;
   TransposeDataHandler source_metadata;
   
   
