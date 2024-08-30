@@ -50,17 +50,17 @@ FileWriteHandler& MMapWriteHandler::get_file() {
 
 
 
-int main() {
-  
-  
-  MMapWriteHandler mmap_write_handler("exdata2.csv", 101);
-  
-  const char* chunk = "Hello, world.";
-  mmap_write_handler.write_fragment(0, chunk, strlen(chunk));
-  
-  mmap_write_handler.write_fragment(0 + strlen(chunk), chunk, strlen(chunk));
-  
-}
+// int main() {
+//   
+//   
+//   MMapWriteHandler mmap_write_handler("exdata2.csv", 101);
+//   
+//   const char* chunk = "Hello, world.";
+//   mmap_write_handler.write_fragment(0, chunk, strlen(chunk));
+//   
+//   mmap_write_handler.write_fragment(0 + strlen(chunk), chunk, strlen(chunk));
+//   
+// }
 
 
 
