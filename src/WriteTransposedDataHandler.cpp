@@ -1,17 +1,17 @@
 #include <Rcpp.h>
 #include <string>
 #include "MMapWriteHandler.h"
+#include "TransposeDataHandler.h"
 
 WriteTransposedDataHandler::WriteTransposedDataHandler(const std::string& filename, 
-            off_t size, size_t fragment_size, size_t sync_size)
-  : writer(filename, size) {
-  
+            off_t read_size, size_t fragment_size, size_t sync_size)
+  : writer(filename, size), source_data(filename, read_size) {
   
 }
 
 void WriteTransposedDataHandler::write_transpose() {
   
-  
+  writer.write_fragment(pos, chunk, )
 }
 
 int main() {
