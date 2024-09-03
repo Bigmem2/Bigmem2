@@ -11,7 +11,7 @@ class MMapWriteHandler {
 
 public:
 
-MMapWriteHandler(const std::string& filename, off_t size);
+MMapWriteHandler(const std::string& filename, off_t size, off_t threshold);
 
 ~MMapWriteHandler();
 
@@ -34,6 +34,8 @@ FileWriteHandler& get_file();
 private:
   FileWriteHandler file;
   void* fileData_ptr;
+  size_t bytes_written;
+  size_t threshold;
 
 };
 

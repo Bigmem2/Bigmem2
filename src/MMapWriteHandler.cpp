@@ -6,14 +6,19 @@
 #include "FileWriteHandler.h"
 #include "MMapWriteHandler.h"
 
-MMapWriteHandler::MMapWriteHandler(const std::string& filename, off_t size)
+MMapWriteHandler::MMapWriteHandler(const std::string& filename, off_t size, off_t threshold)
   : file(filename, size), fileData_ptr(nullptr) {
 
   fileData_ptr = mmap(nullptr, file.get_size(), PROT_READ | PROT_WRITE, MAP_SHARED,
                       file.get_fd(), 0);
+  
+  this->bytes_written = 0;
+  this->threshold = threshold;
 }
 
 MMapWriteHandler::~MMapWriteHandler() {
+  
+  msync(fileData_ptr, file.get_size(), MS_SYNC);
 
   if (fileData_ptr && fileData_ptr != MAP_FAILED) {
 
@@ -41,6 +46,15 @@ void* MMapWriteHandler::get_fileData_ptr() const {
 void MMapWriteHandler::write_fragment(size_t offset, const char* chunk, size_t size) {
   
   memcpy(this->get_fileData() + offset, chunk, size);
+  
+  bytes_written += size;
+  
+  if (bytes_written >= threshold) {
+    
+    msync(fileData_ptr, bytes_written, MS_ASYNC);
+    
+    bytes_written = 0;
+  }
 }
 
 FileWriteHandler& MMapWriteHandler::get_file() {
@@ -50,17 +64,20 @@ FileWriteHandler& MMapWriteHandler::get_file() {
 
 
 
-// int main() {
-//   
-//   
-//   MMapWriteHandler mmap_write_handler("exdata2.csv", 101);
-//   
-//   const char* chunk = "Hello, world.";
-//   mmap_write_handler.write_fragment(0, chunk, strlen(chunk));
-//   
-//   mmap_write_handler.write_fragment(0 + strlen(chunk), chunk, strlen(chunk));
-//   
-// }
+int main() {
+
+
+  MMapWriteHandler mmap_write_handler("exdata2.csv", 101, 50);
+
+  const char* chunk = "Hello, world.";
+  mmap_write_handler.write_fragment(0, chunk, strlen(chunk));
+
+  mmap_write_handler.write_fragment(0 + strlen(chunk), chunk, strlen(chunk));
+  mmap_write_handler.write_fragment(0 + 2*strlen(chunk), chunk, strlen(chunk));
+  mmap_write_handler.write_fragment(0 + 3*strlen(chunk), chunk, strlen(chunk));
+  mmap_write_handler.write_fragment(0 + 4*strlen(chunk), chunk, strlen(chunk));
+
+}
 
 
 
