@@ -129,6 +129,16 @@ int TransposeDataHandler::nrow() {
 
 }
 
+int TransposeDataHandler::get_n_row() {
+  
+  return n_row;
+}
+
+int TransposeDataHandler::get_n_col() {
+  
+  return n_col;
+}
+
 void TransposeDataHandler::pre_alloc_wordTable() {
   
   wordTable.resize(n_col);
@@ -191,6 +201,8 @@ void TransposeDataHandler::fill_wordTable() {
       wrd_ct++;
     }
   }
+  
+  read_data.reset();
 }
 
 void TransposeDataHandler::transpose(std::vector<std::vector<int>>* table) {
@@ -209,6 +221,25 @@ void TransposeDataHandler::transpose(std::vector<std::vector<int>>* table) {
   }
   
   *table = std::move(table_tranp);
+}
+
+int TransposeDataHandler::get_elem_wordTable(int i, int j) {
+  
+  const int* row_ptr = wordTable[j].data();
+  
+  return *(row_ptr + i);
+}
+
+int TransposeDataHandler::get_elem_wordStartsTable(int i, int j) {
+  
+  const int* row_ptr = wordStartsTable[j].data();
+  
+  return *(row_ptr + i);
+}
+
+ReadDataHandler* get_ReadDataHandler() {
+  
+  return &read_data;
 }
 
 // void TransposeDataHandler::push_wordlengths() {
@@ -235,26 +266,37 @@ void TransposeDataHandler::transpose(std::vector<std::vector<int>>* table) {
 //   
 // }
 
-int main() {
-  try {
-    
-    auto start = std::chrono::high_resolution_clock::now();
-//3650722816/50
-    TransposeDataHandler data("exdata.csv", 100*2^20);
-    
-    auto end = std::chrono::high_resolution_clock::now();
-    
-    auto elapsedMilliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-    auto elapsedSeconds = std::chrono::duration_cast<std::chrono::seconds>(end - start).count();
-    
-    std::cout << "Elapsed time in milliseconds: " << elapsedMilliseconds << " ms\n";
-    std::cout << "Elapsed time in seconds: " << elapsedSeconds << " s\n";
-    
-  } catch(const std::exception& e) {
-    
-    std::cerr << e.what() << std::endl;
-  }
-}
+// int main() {
+//   try {
+//     
+//     auto start = std::chrono::high_resolution_clock::now();
+// //3650722816/50
+//     TransposeDataHandler data("exdata.csv", 100*2^20);
+//     
+//     std::cout << "test word table element access " << data.get_elem_wordTable(3, 0) << std::endl;
+//     std::cout << "test word table element access " << data.get_elem_wordTable(3, 1) << std::endl;
+//     std::cout << "test word table element access " << data.get_elem_wordTable(3, 2) << std::endl;
+//     std::cout << "test word table element access " << data.get_elem_wordTable(3, 3) << std::endl;
+//     
+//     std::cout << "test word table element access " << data.get_elem_wordStartsTable(3, 0) << std::endl;
+//     std::cout << "test word table element access " << data.get_elem_wordStartsTable(3, 1) << std::endl;
+//     std::cout << "test word table element access " << data.get_elem_wordStartsTable(3, 2) << std::endl;
+//     std::cout << "test word table element access " << data.get_elem_wordStartsTable(3, 3) << std::endl;
+//     
+//     
+//     auto end = std::chrono::high_resolution_clock::now();
+//     
+//     auto elapsedMilliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+//     auto elapsedSeconds = std::chrono::duration_cast<std::chrono::seconds>(end - start).count();
+//     
+//     std::cout << "Elapsed time in milliseconds: " << elapsedMilliseconds << " ms\n";
+//     std::cout << "Elapsed time in seconds: " << elapsedSeconds << " s\n";
+//     
+//   } catch(const std::exception& e) {
+//     
+//     std::cerr << e.what() << std::endl;
+//   }
+// }
 
 
 

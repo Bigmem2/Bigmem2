@@ -85,7 +85,7 @@ void ReadDataHandler::reset() {
   this->ptr_location = 0;
 }
 
-void set_chunkSize(off_t size) {
+void ReadDataHandler::set_chunkSize(off_t size) {
   
   this->chunk_size = size;
 }

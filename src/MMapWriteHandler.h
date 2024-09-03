@@ -5,6 +5,7 @@
 #include <string>
 #include <sys/types.h>
 #include "FileHandler.h"
+#include "FileWriteHandler.h"
 
 class MMapWriteHandler {
 

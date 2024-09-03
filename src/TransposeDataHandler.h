@@ -14,6 +14,9 @@ TransposeDataHandler(const std::string& filename, off_t chunk_size);
 int ncol();
 int nrow();
 
+int get_n_row();
+int get_n_col();
+
 void pre_alloc_wordTable();
 
 void fill_wordTable();
@@ -21,6 +24,12 @@ void fill_wordTable();
 void transpose(std::vector<std::vector<int>>* table);
 
 void sort_words();
+
+int get_elem_wordTable(int i, int j);
+
+int get_elem_wordStartsTable(int i, int j);
+
+ReadDataHandler* get_ReadDataHandler();
 
 private:
   //std::string& filename;
