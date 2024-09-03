@@ -10,7 +10,7 @@ class WriteTransposedDataHandler {
   
 public:
 
-WriteTransposedDataHandler(const std::string& filename, off_t size,
+WriteTransposedDataHandler(const std::string& filename, const std::string& filename2, off_t size,
                            size_t sync_threshold, size_t read_size);
   
 void write_transpose();
