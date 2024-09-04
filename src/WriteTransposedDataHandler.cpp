@@ -70,7 +70,9 @@ int main() {
   
   // WriteTransposedDataHandler transpose_data("output.csv", "output_transpose.csv", 20708, 2*100*2^20, 100*2^20);
   
-  WriteTransposedDataHandler transpose_data("output.csv", "output_transpose.csv", 20708, 20708, 20708);
+  WriteTransposedDataHandler transpose_data("flights.csv", "flights_transpose.csv", 33406100, 33406100, 33406100);
+  
+  // left off with this working. the chunk writing does not seem to work! Which part is breaking???
   
   // transpose_data.write_transpose();
   
