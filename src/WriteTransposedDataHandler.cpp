@@ -42,7 +42,7 @@ void WriteTransposedDataHandler::write_transpose() {
       std::cout << "di " << di << "\n" << "dj " << dj << std::endl;
       std::cout << "frag len " << frag_len << std::endl;
       
-      if( word_len >=  frag_len ) {
+      if( word_len >=  frag_len - 1 ) {
         
         std::cout << "word " << word << std::endl;
         
@@ -60,9 +60,15 @@ void WriteTransposedDataHandler::write_transpose() {
         // offset = 1;
         
         std::cout << "word " << word << std::endl;
+        
+        std::cout << "data.get_elem_cumWordTable(di, dj) " << data.get_elem_cumWordTable(di, dj) << std::endl;
+        
+        std::cout << "word_len " << word_len << std::endl;
+        
+        std::cout << "frag_len " << frag_len << std::endl;
 
         // writer.write_fragment( data.get_elem_wordStartsTable(di, dj) + cum_frag_len, word.c_str(), frag_len );
-        writer.write_fragment( data.get_elem_cumWordTable(di, dj) - word_len + 1, word.c_str(), frag_len );
+        writer.write_fragment( data.get_elem_cumWordTable(di, dj) - frag_len, word.c_str(), frag_len );
         word.clear();
         
         di += 1;
@@ -95,7 +101,7 @@ void WriteTransposedDataHandler::write_transpose() {
 
 int main() {
   
-  WriteTransposedDataHandler transpose_data("exdata.csv", "exdata2.csv", 101, 101, 101);
+  WriteTransposedDataHandler transpose_data("extest.csv", "extest2.csv", 180, 180, 180);
   
   transpose_data.write_transpose();
   

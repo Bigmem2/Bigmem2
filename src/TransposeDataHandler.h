@@ -45,8 +45,10 @@ private:
   int n_row;
   std::vector<std::vector<int>> wordTable;
   std::vector<std::vector<int>> cum_wordTable;
+  std::vector<std::vector<int>> t_wordTable;
+  std::vector<std::vector<int>> t_cum_wordTable;
   // std::vector<std::vector<int>> t_cum_wordTable;
-  std::vector<std::vector<int>> wordStartsTable;
+  // std::vector<std::vector<int>> wordStartsTable;
   // const std::string& chunk_of_data;
 
 };

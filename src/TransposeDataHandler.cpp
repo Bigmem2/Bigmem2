@@ -37,13 +37,13 @@ TransposeDataHandler::TransposeDataHandler(const std::string& filename, off_t ch
   // 
   // std::cout << std::endl; 
   // 
-  std::cout << "Contents of wordStartsTable:" << std::endl;
-  for (const auto& column : wordStartsTable) {
-    for (const int& value : column) {
-      std::cout << value << ", ";
-    }
-    std::cout << std::endl;
-  }
+  // std::cout << "Contents of wordStartsTable:" << std::endl;
+  // for (const auto& column : wordStartsTable) {
+  //   for (const int& value : column) {
+  //     std::cout << value << ", ";
+  //   }
+  //   std::cout << std::endl;
+  // }
   
   // transpose(&wordTable);
   // 
@@ -196,12 +196,12 @@ void TransposeDataHandler::pre_alloc_wordTable() {
     column.resize(n_row);
   }
   
-  wordStartsTable.resize(n_col);
-  
-  for(auto& column : wordStartsTable) {
-    
-    column.resize(n_row);
-  }
+  // wordStartsTable.resize(n_col);
+  // 
+  // for(auto& column : wordStartsTable) {
+  //   
+  //   column.resize(n_row);
+  // }
 }
 
 void TransposeDataHandler::fill_wordTable() {
@@ -228,7 +228,7 @@ void TransposeDataHandler::fill_wordTable() {
         
         // cum_wordTable[col_position][row_position] = byte_pos;
         cum_wrd_ct += wrd_ct;
-        wordStartsTable[col_position][row_position] = byte_pos - wrd_ct;
+        // wordStartsTable[col_position][row_position] = byte_pos - wrd_ct;
         
         col_position++;
         
@@ -244,7 +244,7 @@ void TransposeDataHandler::fill_wordTable() {
         
         // cum_wordTable[col_position][row_position] = byte_pos;
         cum_wrd_ct += wrd_ct;
-        wordStartsTable[col_position][row_position] = byte_pos - wrd_ct;
+        // wordStartsTable[col_position][row_position] = byte_pos - wrd_ct;
         
         row_position++;
         
@@ -310,12 +310,12 @@ int TransposeDataHandler::get_elem_wordTable(int i, int j) {
   return *(row_ptr + i);
 }
 
-int TransposeDataHandler::get_elem_wordStartsTable(int i, int j) {
-  
-  const int* row_ptr = wordStartsTable[j].data();
-  
-  return *(row_ptr + i);
-}
+// int TransposeDataHandler::get_elem_wordStartsTable(int i, int j) {
+//   
+//   const int* row_ptr = wordStartsTable[j].data();
+//   
+//   return *(row_ptr + i);
+// }
 
 int TransposeDataHandler::get_elem_cumWordTable(int i, int j) {
   
