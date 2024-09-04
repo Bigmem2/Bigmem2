@@ -24,13 +24,14 @@ void WriteTransposedDataHandler::write_transpose() {
     std::string word;
     int word_len = 0;
     int frag_len = 0;
-    
+    int offset = 0;
+
     for(size_t i = 0; i < chunkPtr->size(); ++i) {
       
       // do ...
       char element = (*chunkPtr)[i];
       
-      if( element == ',' ) {
+      if( element == ','  || element == '\n' ) {
         continue;
       }
       
@@ -44,17 +45,36 @@ void WriteTransposedDataHandler::write_transpose() {
       if( word_len >=  frag_len ) {
         
         std::cout << "word " << word << std::endl;
+        
+        
+        
+        if( dj < data.get_n_col() - 1 ) { 
+          
+          word.push_back( ',' );
+        } else {
+          
+          word.push_back( '\n' );
+        }
+        // frag_len += 1;
+        // word_len += 1;
+        // offset = 1;
+        
+        std::cout << "word " << word << std::endl;
 
-        writer.write_fragment( data.get_elem_wordStartsTable(di, dj), word.c_str(), frag_len );
+        // writer.write_fragment( data.get_elem_wordStartsTable(di, dj) + cum_frag_len, word.c_str(), frag_len );
+        writer.write_fragment( data.get_elem_cumWordTable(di, dj) - word_len + 1, word.c_str(), frag_len );
         word.clear();
         
         di += 1;
         
         std::cout << "data.get_n_row() " << data.get_n_row() << std::endl;
-        if( di >= ( data.get_n_row() - 1 ) ) {
+        if( di == data.get_n_row() ) {
           
+          di = 0;
           dj += 1;
         }
+        
+        offset += 1;
         
         word_len = 0;
       }

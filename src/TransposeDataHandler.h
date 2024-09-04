@@ -23,11 +23,15 @@ void fill_wordTable();
 
 void transpose(std::vector<std::vector<int>>* table);
 
+void cumsum(std::vector<std::vector<int>>* table);
+
 void sort_words();
 
 int get_elem_wordTable(int i, int j);
 
 int get_elem_wordStartsTable(int i, int j);
+
+int get_elem_cumWordTable(int i, int j);
 
 ReadDataHandler* get_ReadDataHandler();
 
@@ -40,6 +44,8 @@ private:
   int n_col;
   int n_row;
   std::vector<std::vector<int>> wordTable;
+  std::vector<std::vector<int>> cum_wordTable;
+  // std::vector<std::vector<int>> t_cum_wordTable;
   std::vector<std::vector<int>> wordStartsTable;
   // const std::string& chunk_of_data;
 
