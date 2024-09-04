@@ -8,7 +8,7 @@ WriteTransposedDataHandler::WriteTransposedDataHandler(const std::string& filena
   const std::string& filename2, off_t size, size_t sync_threshold, size_t read_size)
   : writer(filename2, size, sync_threshold), data(filename, read_size) {
   
-  // write_transpose();
+  write_transpose();
 }
 
 void WriteTransposedDataHandler::write_transpose() {
@@ -24,14 +24,13 @@ void WriteTransposedDataHandler::write_transpose() {
     std::string word;
     int word_len = 0;
     int frag_len = 0;
-    int offset = 0;
 
     for(size_t i = 0; i < chunkPtr->size(); ++i) {
       
-      // do ...
       char element = (*chunkPtr)[i];
       
       if( element == ','  || element == '\n' ) {
+        
         continue;
       }
       
@@ -39,14 +38,8 @@ void WriteTransposedDataHandler::write_transpose() {
       word_len += 1;
       
       frag_len = data.get_elem_wordTable(di, dj);
-      std::cout << "di " << di << "\n" << "dj " << dj << std::endl;
-      std::cout << "frag len " << frag_len << std::endl;
       
       if( word_len >=  frag_len - 1 ) {
-        
-        std::cout << "word " << word << std::endl;
-        
-        
         
         if( dj < data.get_n_row() - 1 ) { 
           
@@ -55,55 +48,31 @@ void WriteTransposedDataHandler::write_transpose() {
           
           word.push_back( '\n' );
         }
-        // frag_len += 1;
-        // word_len += 1;
-        // offset = 1;
-        
-        std::cout << "word " << word << std::endl;
-        
-        std::cout << "data.get_elem_cumWordTable(di, dj) " << data.get_elem_cumWordTable(di, dj) << std::endl;
-        
-        std::cout << "word_len " << word_len << std::endl;
-        
-        std::cout << "frag_len " << frag_len << std::endl;
 
-        // writer.write_fragment( data.get_elem_wordStartsTable(di, dj) + cum_frag_len, word.c_str(), frag_len );
         writer.write_fragment( data.get_elem_cumWordTable(di, dj) - frag_len, word.c_str(), frag_len );
         word.clear();
         
         di += 1;
         
-        std::cout << "data.get_n_col() " << data.get_n_col() << std::endl;
         if( di == data.get_n_col() ) {
           
           di = 0;
           dj += 1;
         }
         
-        offset += 1;
-        
         word_len = 0;
       }
-      
-      
-      // char element = (*chunkPtr)[i];
-      // 
-      // if(element == '\n') {
-      //   
-      //   n_row++;
-      // }
     }
   }
-  
-  
-  
 }
 
 int main() {
   
-  WriteTransposedDataHandler transpose_data("extest.csv", "extest2.csv", 180, 180, 180);
+  // WriteTransposedDataHandler transpose_data("output.csv", "output_transpose.csv", 20708, 2*100*2^20, 100*2^20);
   
-  transpose_data.write_transpose();
+  WriteTransposedDataHandler transpose_data("output.csv", "output_transpose.csv", 20708, 20708, 20708);
+  
+  // transpose_data.write_transpose();
   
 }
 

@@ -7,9 +7,6 @@ TransposeDataHandler::TransposeDataHandler(const std::string& filename, off_t ch
 
   this->chunk_size = chunk_size;
   
-  // this->read_data.get_chunk(0);
-  // this->read_data.get_chunk(0);
-  
   this->n_row = this->nrow();
   this->n_col = this->ncol();
   
@@ -17,35 +14,10 @@ TransposeDataHandler::TransposeDataHandler(const std::string& filename, off_t ch
   
   fill_wordTable();
   
-  std::cout << "Contents of wordTable:" << std::endl;
-  for (const auto& row : wordTable) {
-    for (const int& value : row) {
-      std::cout << value << ", ";  // Use tab to separate columns
-    }
-    std::cout << std::endl;  // New line after each row
-  }
-  
   transpose(&wordTable, &t_wordTable);
-
-  std::cout << "Contents of t_wordTable:" << std::endl;
-  for (const auto& row : t_wordTable) {
-    for (const int& value : row) {
-      std::cout << value << ", ";  // Use tab to separate columns
-    }
-    std::cout << std::endl;  // New line after each row
-  }
 
   cumsum(&cum_wordTable);
   transpose(&cum_wordTable, &t_cum_wordTable);
-
-  std::cout << "Contents of cumsum wordTable:" << std::endl;
-  for (const auto& row : t_cum_wordTable) {
-    for (const int& value : row) {
-      std::cout << value << ", ";  // Use tab to separate columns
-    }
-    std::cout << std::endl;  // New line after each row
-  }
-  
 }
 
 
@@ -79,10 +51,7 @@ int TransposeDataHandler::ncol() {
   
   read_data.reset();
   
-  std::cout << n_col << std::endl;
-  
   return n_col;
-
 }
 
 int TransposeDataHandler::nrow() {
@@ -113,10 +82,7 @@ int TransposeDataHandler::nrow() {
   
   read_data.reset();
   
-  std::cout << n_row << std::endl;
-  
   return n_row;
-
 }
 
 int TransposeDataHandler::get_n_row() {
@@ -158,13 +124,6 @@ void TransposeDataHandler::pre_alloc_wordTable() {
     
     column.resize(n_col);
   }
-  
-  // wordStartsTable.resize(n_col);
-  // 
-  // for(auto& column : wordStartsTable) {
-  //   
-  //   column.resize(n_row);
-  // }
 }
 
 void TransposeDataHandler::fill_wordTable() {
@@ -189,9 +148,7 @@ void TransposeDataHandler::fill_wordTable() {
         wordTable[col_position][row_position] = wrd_ct + 1;
         cum_wordTable[col_position][row_position] = wrd_ct + 1;
         
-        // cum_wordTable[col_position][row_position] = byte_pos;
         cum_wrd_ct += wrd_ct;
-        // wordStartsTable[col_position][row_position] = byte_pos - wrd_ct;
         
         col_position++;
         
@@ -200,14 +157,12 @@ void TransposeDataHandler::fill_wordTable() {
         continue;
       }
       
-      if( (element == '\n') ) { //| (row_position == n_row - 1) 
+      if( (element == '\n') ) { 
         
         wordTable[col_position][row_position] = wrd_ct + 1;
         cum_wordTable[col_position][row_position] = wrd_ct + 1;
         
-        // cum_wordTable[col_position][row_position] = byte_pos;
         cum_wrd_ct += wrd_ct;
-        // wordStartsTable[col_position][row_position] = byte_pos - wrd_ct;
         
         row_position++;
         
@@ -217,7 +172,6 @@ void TransposeDataHandler::fill_wordTable() {
         continue;
       }
       
-      // cum_wrd_ct += wrd_ct;
       byte_pos++;
       wrd_ct++;
     }
@@ -229,11 +183,6 @@ void TransposeDataHandler::fill_wordTable() {
 void TransposeDataHandler::transpose(std::vector<std::vector<int>>* table,
                                      std::vector<std::vector<int>>* table_out) {
   
-  // size_t table_rows = table->size();
-  // size_t table_cols = (*table)[0].size();
-  
-  // std::vector<std::vector<int>> table_tranp(table_cols, std::vector<int>(table_rows));
-  
   for(size_t i = 0; i < static_cast<size_t>(n_row); ++i) {
     
     for(size_t j = 0; j < static_cast<size_t>(n_col); ++j) {
@@ -241,8 +190,6 @@ void TransposeDataHandler::transpose(std::vector<std::vector<int>>* table,
       (*table_out)[i][j] = (*table)[j][i];
     }
   }
-  
-  // *table = std::move(table_tranp);
 }
 
 void TransposeDataHandler::cumsum(std::vector<std::vector<int>>* table) {
@@ -274,13 +221,6 @@ int TransposeDataHandler::get_elem_wordTable(int i, int j) {
   return *(row_ptr + i);
 }
 
-// int TransposeDataHandler::get_elem_wordStartsTable(int i, int j) {
-//   
-//   const int* row_ptr = wordStartsTable[j].data();
-//   
-//   return *(row_ptr + i);
-// }
-
 int TransposeDataHandler::get_elem_cumWordTable(int i, int j) {
   
   const int* row_ptr = t_cum_wordTable[j].data();
@@ -292,30 +232,6 @@ ReadDataHandler* TransposeDataHandler::get_ReadDataHandler() {
   
   return &read_data;
 }
-
-// void TransposeDataHandler::push_wordlengths() {
-//   
-//   
-//   
-//   while( inFirstRow && (chunkPtr = read_data.next_chunk()) != nullptr ) {
-//     
-//     for(size_t i = 0; i < chunkPtr->size(); ++i) {
-//       
-//       char element = (*chunkPtr)[i];
-//       
-//       if( inFirstRow && element == ',' ) {
-//         
-//         ncol += 1;
-//         
-//       } else if( element == '\n' ) {
-//         
-//         inFirstRow = false;
-//       }
-//     }
-//     
-//   }
-//   
-// }
 
 // int main() {
 //   try {
