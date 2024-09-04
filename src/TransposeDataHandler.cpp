@@ -17,46 +17,6 @@ TransposeDataHandler::TransposeDataHandler(const std::string& filename, off_t ch
   
   fill_wordTable();
   
-  // std::cout << "Contents of wordTable:" << std::endl;
-  // for (const auto& row : wordTable) {
-  //   for (const int& value : row) {
-  //     std::cout << value << "\t";  // Use tab to separate columns
-  //   }
-  //   std::cout << std::endl;  // New line after each row
-  // }
-  // 
-  // std::cout << std::endl; 
-  // 
-  // std::cout << "Contents of cum_wordTable:" << std::endl;
-  // for (const auto& row : cum_wordTable) {
-  //   for (const int& value : row) {
-  //     std::cout << value << "\t";  // Use tab to separate columns
-  //   }
-  //   std::cout << std::endl;  // New line after each row
-  // }
-  // 
-  // std::cout << std::endl; 
-  // 
-  // std::cout << "Contents of wordStartsTable:" << std::endl;
-  // for (const auto& column : wordStartsTable) {
-  //   for (const int& value : column) {
-  //     std::cout << value << ", ";
-  //   }
-  //   std::cout << std::endl;
-  // }
-  
-  // transpose(&wordTable);
-  // 
-  // std::cout << "Contents of transposed wordTable:" << std::endl;
-  // for (const auto& row : wordTable) {
-  //   for (const int& value : row) {
-  //     std::cout << value << ", ";  // Use tab to separate columns
-  //   }
-  //   std::cout << std::endl;  // New line after each row
-  // }
-  
-  transpose(&wordTable);
-  
   std::cout << "Contents of wordTable:" << std::endl;
   for (const auto& row : wordTable) {
     for (const int& value : row) {
@@ -65,38 +25,27 @@ TransposeDataHandler::TransposeDataHandler(const std::string& filename, off_t ch
     std::cout << std::endl;  // New line after each row
   }
   
-  // transpose(&wordTable);
+  transpose(&wordTable, &t_wordTable);
+
+  std::cout << "Contents of t_wordTable:" << std::endl;
+  for (const auto& row : t_wordTable) {
+    for (const int& value : row) {
+      std::cout << value << ", ";  // Use tab to separate columns
+    }
+    std::cout << std::endl;  // New line after each row
+  }
+
   cumsum(&cum_wordTable);
-  transpose(&cum_wordTable);
-  
+  transpose(&cum_wordTable, &t_cum_wordTable);
+
   std::cout << "Contents of cumsum wordTable:" << std::endl;
-  for (const auto& row : cum_wordTable) {
+  for (const auto& row : t_cum_wordTable) {
     for (const int& value : row) {
       std::cout << value << ", ";  // Use tab to separate columns
     }
     std::cout << std::endl;  // New line after each row
   }
   
-  
-  
-  // std::cout << "Contents of wordTable transposed:" << std::endl;
-  // for (const auto& row : wordTable) {
-  //   for (const int& value : row) {
-  //     std::cout << value << "\t";  // Use tab to separate columns
-  //   }
-  //   std::cout << std::endl;  // New line after each row
-  // }
-  // 
-  // std::cout << std::endl; 
-  // 
-  // std::cout << "Contents of wordStartsTable transposed:" << std::endl;
-  // for (const auto& row : wordStartsTable) {
-  //   for (const int& value : row) {
-  //     std::cout << value << "\t";  // Use tab to separate columns
-  //   }
-  //   std::cout << std::endl;  // New line after each row
-  // }
-
 }
 
 
@@ -196,6 +145,20 @@ void TransposeDataHandler::pre_alloc_wordTable() {
     column.resize(n_row);
   }
   
+  t_wordTable.resize(n_row);
+  
+  for(auto& column : t_wordTable) {
+    
+    column.resize(n_col);
+  }
+  
+  t_cum_wordTable.resize(n_row);
+  
+  for(auto& column : t_cum_wordTable) {
+    
+    column.resize(n_col);
+  }
+  
   // wordStartsTable.resize(n_col);
   // 
   // for(auto& column : wordStartsTable) {
@@ -263,22 +226,23 @@ void TransposeDataHandler::fill_wordTable() {
   read_data.reset();
 }
 
-void TransposeDataHandler::transpose(std::vector<std::vector<int>>* table) {
+void TransposeDataHandler::transpose(std::vector<std::vector<int>>* table,
+                                     std::vector<std::vector<int>>* table_out) {
   
-  size_t table_rows = table->size();
-  size_t table_cols = (*table)[0].size();
+  // size_t table_rows = table->size();
+  // size_t table_cols = (*table)[0].size();
   
-  std::vector<std::vector<int>> table_tranp(table_cols, std::vector<int>(table_rows));
+  // std::vector<std::vector<int>> table_tranp(table_cols, std::vector<int>(table_rows));
   
   for(size_t i = 0; i < static_cast<size_t>(n_row); ++i) {
     
     for(size_t j = 0; j < static_cast<size_t>(n_col); ++j) {
       
-      table_tranp[j][i] = (*table)[i][j];
+      (*table_out)[i][j] = (*table)[j][i];
     }
   }
   
-  *table = std::move(table_tranp);
+  // *table = std::move(table_tranp);
 }
 
 void TransposeDataHandler::cumsum(std::vector<std::vector<int>>* table) {
@@ -305,7 +269,7 @@ void TransposeDataHandler::cumsum(std::vector<std::vector<int>>* table) {
 
 int TransposeDataHandler::get_elem_wordTable(int i, int j) {
   
-  const int* row_ptr = wordTable[j].data();
+  const int* row_ptr = t_wordTable[j].data();
   
   return *(row_ptr + i);
 }
@@ -319,7 +283,7 @@ int TransposeDataHandler::get_elem_wordTable(int i, int j) {
 
 int TransposeDataHandler::get_elem_cumWordTable(int i, int j) {
   
-  const int* row_ptr = cum_wordTable[j].data();
+  const int* row_ptr = t_cum_wordTable[j].data();
   
   return *(row_ptr + i);
 }

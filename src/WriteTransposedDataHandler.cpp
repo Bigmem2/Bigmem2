@@ -48,7 +48,7 @@ void WriteTransposedDataHandler::write_transpose() {
         
         
         
-        if( dj < data.get_n_col() - 1 ) { 
+        if( dj < data.get_n_row() - 1 ) { 
           
           word.push_back( ',' );
         } else {
@@ -73,8 +73,8 @@ void WriteTransposedDataHandler::write_transpose() {
         
         di += 1;
         
-        std::cout << "data.get_n_row() " << data.get_n_row() << std::endl;
-        if( di == data.get_n_row() ) {
+        std::cout << "data.get_n_col() " << data.get_n_col() << std::endl;
+        if( di == data.get_n_col() ) {
           
           di = 0;
           dj += 1;

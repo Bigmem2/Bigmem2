@@ -21,7 +21,8 @@ void pre_alloc_wordTable();
 
 void fill_wordTable();
 
-void transpose(std::vector<std::vector<int>>* table);
+void transpose(std::vector<std::vector<int>>* table,
+               std::vector<std::vector<int>> *table_out);
 
 void cumsum(std::vector<std::vector<int>>* table);
 
