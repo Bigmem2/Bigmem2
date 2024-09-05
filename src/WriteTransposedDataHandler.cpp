@@ -4,9 +4,13 @@
 #include "TransposeDataHandler.h"
 #include "WriteTransposedDataHandler.h"
 
+
+//: writer(filename2, size, sync_threshold), data(filename, read_size) 
+
 WriteTransposedDataHandler::WriteTransposedDataHandler(const std::string& filename, 
-  const std::string& filename2, off_t size, size_t sync_threshold, size_t read_size)
-  : writer(filename2, size, sync_threshold), data(filename, read_size) {
+  const std::string& filename2, off_t sync_threshold, off_t read_size)
+  : data(filename, read_size),
+    writer(filename2, data.get_ReadDataHandler()->get_fileSize(), sync_threshold) {
   
   write_transpose();
 }
@@ -19,12 +23,12 @@ void WriteTransposedDataHandler::write_transpose() {
   int di = 0;
   int dj = 0;
   
+  std::string word;
+  int word_len = 0;
+  int frag_len = 0;
+  
   while( ( chunkPtr = read_data->next_chunk()) != nullptr ) {
     
-    std::string word;
-    int word_len = 0;
-    int frag_len = 0;
-
     for(size_t i = 0; i < chunkPtr->size(); ++i) {
       
       char element = (*chunkPtr)[i];
@@ -70,7 +74,7 @@ int main() {
   
   // WriteTransposedDataHandler transpose_data("output.csv", "output_transpose.csv", 20708, 2*100*2^20, 100*2^20);
   
-  WriteTransposedDataHandler transpose_data("flights.csv", "flights_transpose.csv", 33406100, 33406100, 33406100);
+  WriteTransposedDataHandler transpose_data("extest.csv", "extest2.csv", 90, 90);
   
   // left off with this working. the chunk writing does not seem to work! Which part is breaking???
   

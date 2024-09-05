@@ -10,15 +10,15 @@ class WriteTransposedDataHandler {
   
 public:
 
-WriteTransposedDataHandler(const std::string& filename, const std::string& filename2, off_t size,
-                           size_t sync_threshold, size_t read_size);
+WriteTransposedDataHandler(const std::string& filename, const std::string& filename2, 
+                           off_t sync_threshold, off_t read_size);
   
 void write_transpose();
   
 private:
+  TransposeDataHandler data;
   MMapWriteHandler writer;
   //ReadDataHandler source_data;
-  TransposeDataHandler data;
   
   
 };
