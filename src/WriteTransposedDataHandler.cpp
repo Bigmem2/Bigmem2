@@ -19,13 +19,16 @@ void WriteTransposedDataHandler::write_transpose() {
   
   ReadDataHandler* read_data = data.get_ReadDataHandler();
   
+  int n_row = data.get_n_row();
+  int n_col = data.get_n_col();
+  
   std::string* chunkPtr;
   int di = 0;
   int dj = 0;
   
   std::string word;
+  word.reserve( 1024 );
   int word_len = 0;
-  int frag_len = 0;
   
   while( ( chunkPtr = read_data->next_chunk()) != nullptr ) {
     
@@ -39,32 +42,24 @@ void WriteTransposedDataHandler::write_transpose() {
       }
       
       word.push_back( element );
-      word_len += 1;
+      ++word_len;
       
-      frag_len = data.get_elem_wordTable(di, dj);
+      int frag_len = data.get_elem_wordTable(di, dj);
       
       if( word_len >=  frag_len - 1 ) {
         
-        if( dj < data.get_n_row() - 1 ) { 
-          
-          word.push_back( ',' );
-        } else {
-          
-          word.push_back( '\n' );
-        }
+        word.push_back( (dj < n_row - 1) ? ',' : '\n' );
 
         writer.write_fragment( data.get_elem_cumWordTable(di, dj) - frag_len, word.c_str(), frag_len );
+        
         word.clear();
+        word_len = 0;
         
-        di += 1;
-        
-        if( di == data.get_n_col() ) {
+        if( ++di == n_col ) {
           
           di = 0;
-          dj += 1;
+          ++dj;
         }
-        
-        word_len = 0;
       }
     }
   }
