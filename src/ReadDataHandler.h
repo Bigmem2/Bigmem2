@@ -34,6 +34,8 @@ void reset();
 
 void set_all_chunk_ptrs();
 
+std::vector<off_t>& get_all_chunk_ptrs() const;
+
 private:
   MMapHandler mmap_hdlr;
   off_t file_size;

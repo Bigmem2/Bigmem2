@@ -104,6 +104,11 @@ void ReadDataHandler::set_all_chunk_ptrs() {
   }
 }
 
+std::vector<off_t>& ReadDataHandler::get_all_chunk_ptrs() const {
+  
+  return all_chunk_ptrs;
+}
+
 // test
 // int main() {
 // 
