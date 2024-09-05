@@ -11,6 +11,8 @@ ReadDataHandler::ReadDataHandler(const std::string& filename, off_t chunk_size)
 
   ptr_file_start = static_cast<const char*>(mmap_hdlr.get_fileData_ptr());
   ptr_location = 0;
+  
+  set_all_chunk_ptrs();
 }
 
 std::string* ReadDataHandler::next_chunk() {
@@ -88,6 +90,18 @@ void ReadDataHandler::reset() {
 void ReadDataHandler::set_chunkSize(off_t size) {
   
   this->chunk_size = size;
+}
+
+void ReadDataHandler::set_all_chunk_ptrs() {
+  
+  off_t current_ptr = 0;
+  
+  while ( current_ptr < file_size ) {
+    
+    all_chunk_ptrs.push_back( current_ptr );
+    
+    current_ptr += chunk_size;
+  }
 }
 
 // test

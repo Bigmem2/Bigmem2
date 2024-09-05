@@ -32,6 +32,8 @@ bool chunk_in_range();
 
 void reset();
 
+void set_all_chunk_ptrs();
+
 private:
   MMapHandler mmap_hdlr;
   off_t file_size;
@@ -41,6 +43,7 @@ private:
   off_t prev_ptr_location;
   const char* ptr_file_start;
   std::string str_data_chunk;
+  std::vector<off_t> all_chunk_ptrs;
 
 
 };

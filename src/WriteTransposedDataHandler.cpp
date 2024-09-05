@@ -1,5 +1,6 @@
 #include <Rcpp.h>
 #include <string>
+#include <chrono> // for testing the timing
 #include "MMapWriteHandler.h"
 #include "TransposeDataHandler.h"
 #include "WriteTransposedDataHandler.h"
@@ -69,7 +70,22 @@ int main() {
   
   // WriteTransposedDataHandler transpose_data("output.csv", "output_transpose.csv", 20708, 2*100*2^20, 100*2^20);
   
-  WriteTransposedDataHandler transpose_data("extest.csv", "extest2.csv", 90, 90);
+  auto start = std::chrono::high_resolution_clock::now();
+  
+  WriteTransposedDataHandler transpose_data("flights.csv", 
+                                            "flights2.csv", 
+                                            33406100, //65536, 
+                                            33406100  //200*2^20  //65536
+                                            );
+  
+  auto end = std::chrono::high_resolution_clock::now();
+  
+  auto elapsedMilliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+  auto elapsedSeconds = std::chrono::duration_cast<std::chrono::seconds>(end - start).count();
+
+  std::cout << "Elapsed time in milliseconds: " << elapsedMilliseconds << " ms\n";
+  std::cout << "Elapsed time in seconds: " << elapsedSeconds << " s\n";
+
   
   // left off with this working. the chunk writing does not seem to work! Which part is breaking???
   
