@@ -88,24 +88,29 @@ int TransposeDataHandler::nrow() {
 // idea: the byte pointer vector to each chunk is the start + return of this 
 // gets you to the right position
 std::vector<int> byte_line_processor(std::string* chunkPtr,
-                                     int chunk_size) {
+                                     int chunk_size,
+                                     int est_line_size) {
   
   int nLines = 0;
   int bytes = 0;
   std::vector<int> indexes;
   
-  for (i = 0; i < chunk_size; ++i) {
+  indexes.reserve( chunk_size / est_line_size );
+  
+  const std::string& chunk = *chunkPtr;
+  
+  for (int i = 0; i < chunk_size; ++i) {
     
     ++bytes;
     
-    if ( (*chunkPtr)[i] == '\n' ) {
+    if ( chunkPtr[i] == '\n' ) {
       
       indexes.push_back(bytes);
       bytes = 0;
     }
   }
   
-  return nLines;
+  return indexes;
 }
 
 int TransposeDataHandler::detect_bytes_per_line(std::vector<threads>* threads,
@@ -124,7 +129,7 @@ int TransposeDataHandler::detect_bytes_per_line(std::vector<threads>* threads,
     int start = i * work_per_thread;
     int end = (i == num_threads - 1) ? total_work : start + work_per_thread; 
     
-    threads.push_back(std::thread(byte_line_processor));
+    threads.push_back(std::thread(byte_line_processor, chunk_size, est_line_size));
     
   }
   
