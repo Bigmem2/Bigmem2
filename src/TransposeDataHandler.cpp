@@ -1,5 +1,6 @@
 #include <Rcpp.h>
 #include <chrono> // for testing the timing
+#include <thread>
 #include "TransposeDataHandler.h"
 
 TransposeDataHandler::TransposeDataHandler(const std::string& filename, off_t chunk_size)
@@ -83,6 +84,55 @@ int TransposeDataHandler::nrow() {
   read_data.reset();
   
   return n_row;
+}
+// idea: the byte pointer vector to each chunk is the start + return of this 
+// gets you to the right position
+std::vector<int> byte_line_processor(std::string* chunkPtr,
+                                     int chunk_size) {
+  
+  int nLines = 0;
+  int bytes = 0;
+  std::vector<int> indexes;
+  
+  for (i = 0; i < chunk_size; ++i) {
+    
+    ++bytes;
+    
+    if ( (*chunkPtr)[i] == '\n' ) {
+      
+      indexes.push_back(bytes);
+      bytes = 0;
+    }
+  }
+  
+  return nLines;
+}
+
+int TransposeDataHandler::detect_bytes_per_line(std::vector<threads>* threads,
+                                                int num_threads) {
+  // fast search through file to find bytes per line
+  
+  const std::vector<off_t>& all_chunk_ptrs = read_data->get_all_chunk_ptrs();
+  
+  int n_total_chunks = all_chunk_ptrs.size();
+  int work_per_thread = n_total_chunks / num_threads;
+  
+  std::string* get_chunk(off_t ptr_start);
+  
+  for (int i = 0; i < num_threads; ++i) {
+    // partition indexing
+    int start = i * work_per_thread;
+    int end = (i == num_threads - 1) ? total_work : start + work_per_thread; 
+    
+    threads.push_back(std::thread(byte_line_processor));
+    
+  }
+  
+  for (auto& th : threads) {
+    
+    th.join();
+  }
+  
 }
 
 int TransposeDataHandler::get_n_row() {

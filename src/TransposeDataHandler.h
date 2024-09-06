@@ -3,6 +3,7 @@
 
 #include <Rcpp.h>
 #include <string>
+#include <threads>
 #include "ReadDataHandler.h"
 
 class TransposeDataHandler {
@@ -13,6 +14,8 @@ TransposeDataHandler(const std::string& filename, off_t chunk_size);
 
 int ncol();
 int nrow();
+
+int detect_bytes_per_line(std::vector<threads>* threads, int num_threads);
 
 int get_n_row();
 int get_n_col();
@@ -44,6 +47,7 @@ private:
   std::vector<int> cumsum_starts;
   int n_col;
   int n_row;
+  std::vector<int> bytes_per_line;
   std::vector<std::vector<int>> wordTable;
   std::vector<std::vector<int>> cum_wordTable;
   std::vector<std::vector<int>> t_wordTable;
