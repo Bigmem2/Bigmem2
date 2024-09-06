@@ -11,7 +11,7 @@ class WriteTransposedDataHandler {
 public:
 
 WriteTransposedDataHandler(const std::string& filename, const std::string& filename2, 
-                           off_t sync_threshold, off_t read_size);
+                           off_t sync_threshold, off_t read_size, int num_threads);
   
 void write_transpose();
   
@@ -19,7 +19,7 @@ private:
   TransposeDataHandler data;
   MMapWriteHandler writer;
   //ReadDataHandler source_data;
-  
+  int num_threads;
   
 };
 

@@ -1,5 +1,6 @@
 #include <Rcpp.h>
 #include <string>
+#include <thread>
 #include <chrono> // for testing the timing
 #include "MMapWriteHandler.h"
 #include "TransposeDataHandler.h"
@@ -9,9 +10,12 @@
 //: writer(filename2, size, sync_threshold), data(filename, read_size) 
 
 WriteTransposedDataHandler::WriteTransposedDataHandler(const std::string& filename, 
-  const std::string& filename2, off_t sync_threshold, off_t read_size)
+  const std::string& filename2, off_t sync_threshold, off_t read_size,
+  int num_threads)
   : data(filename, read_size),
     writer(filename2, data.get_ReadDataHandler()->get_fileSize(), sync_threshold) {
+  
+  this->num_threads = num_threads;
   
   write_transpose();
 }
@@ -19,6 +23,13 @@ WriteTransposedDataHandler::WriteTransposedDataHandler(const std::string& filena
 void WriteTransposedDataHandler::write_transpose() {
   
   ReadDataHandler* read_data = data.get_ReadDataHandler();
+  
+  const std::vector<off_t>& all_chunk_ptrs = read_data->get_all_chunk_ptrs();
+  int n_total_chunks = all_chunk_ptrs.size();
+  
+  int work_per_thread = n_total_chunks / num_threads;
+  
+  std::vector<std::thread> threads;
   
   int n_row = data.get_n_row();
   int n_col = data.get_n_col();
@@ -75,7 +86,8 @@ int main() {
   WriteTransposedDataHandler transpose_data("flights.csv", 
                                             "flights2.csv", 
                                             33406100, //65536, 
-                                            33406100  //200*2^20  //65536
+                                            33406100,  //200*2^20  //65536
+                                            4
                                             );
   
   auto end = std::chrono::high_resolution_clock::now();
