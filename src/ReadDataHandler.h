@@ -34,7 +34,7 @@ void reset();
 
 void set_all_chunk_ptrs();
 
-std::vector<off_t>& get_all_chunk_ptrs() const;
+const std::vector<off_t>& get_all_chunk_ptrs() const;
 
 private:
   MMapHandler mmap_hdlr;
@@ -44,7 +44,7 @@ private:
   off_t ptr_location;
   off_t prev_ptr_location;
   const char* ptr_file_start;
-  std::string str_data_chunk;
+  thread_local static std::string str_data_chunk;
   std::vector<off_t> all_chunk_ptrs;
 
 

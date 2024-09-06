@@ -4,8 +4,10 @@
 #include "MMapHandler.h"
 #include "ReadDataHandler.h"
 
+thread_local std::string ReadDataHandler::str_data_chunk = "";
+
 ReadDataHandler::ReadDataHandler(const std::string& filename, off_t chunk_size)
-  : mmap_hdlr(filename), chunk_size(chunk_size), str_data_chunk("")  {
+  : mmap_hdlr(filename), chunk_size(chunk_size)  {
 
   file_size = mmap_hdlr.get_file().get_fileSize();
 
@@ -39,6 +41,8 @@ std::string* ReadDataHandler::next_chunk() {
 
 std::string* ReadDataHandler::get_chunk(off_t ptr_start) {
   
+  str_data_chunk.clear();
+  
   // use ptr_location and mmap and chunk_size to fill str_data_chunk with new data
   if( ptr_start < file_size ) {
     
@@ -47,10 +51,9 @@ std::string* ReadDataHandler::get_chunk(off_t ptr_start) {
     // const char* chunk_start = ptr_file_start + ptr_location;
     str_data_chunk = mmap_hdlr.get_range(ptr_start, ptr_start + read_length);
     
-    ptr_start += read_length;
+    ptr_start += read_length; // this looks redundant! review and remove
     
     return &str_data_chunk;
-    
   } else {
     
     return nullptr;
@@ -110,81 +113,78 @@ const std::vector<off_t>& ReadDataHandler::get_all_chunk_ptrs() const {
 }
 
 // test
-int main() {
-
-  try{
-    // instantiate a new read data handler
-    // off_t bytes = static_cast<off_t>(10);
-
-    auto start = std::chrono::high_resolution_clock::now();
-
-    ReadDataHandler read_data("flights.csv", 1600);
-
-    // std::cout << "Next chunk: " << read_data.next_chunk() << std::endl;
-
-    int ctr;
-    ctr = 1;
-    std::vector<size_t> new_line_pos;
-    off_t starts_here;
-
-    std::cout << "File size: " << read_data.get_fileSize() << std::endl;
-    
-    // std::cout << "All chunk ptrs: " << read_data.get_all_chunk_ptrs() << std::endl;
-    
-    std::cout << "All chunk ptrs: [";
-    const std::vector<off_t>& chunk_ptrs = read_data.get_all_chunk_ptrs();
-    for (size_t i = 0; i < chunk_ptrs.size(); ++i) {
-      std::cout << chunk_ptrs[i];
-      if (i != chunk_ptrs.size() - 1) {
-        std::cout << ", "; // Add comma between elements
-      }
-    }
-    std::cout << "]" << std::endl;
-
-    std::string* data;
-
-    while( (data = read_data.next_chunk()) != nullptr ) {
-      // std::cout << *data << std::endl;
-
-      // std::cout << ctr << std::endl;
-      // starts_here = read_data.get_ptrLocation();
-      //
-      // stop = read_data.next_chunk();
-      //
-      // // search for metadata for the transformation step (next method)
-      // for (size_t i = 0; i < stop.size(); ++i) {
-      //   if (stop[i] == '\n') {
-      //     new_line_pos.push_back( starts_here + i ); // could we do this in a memory mapped way instead?? just a thought
-      //   }
-      // }
-      //
-      // ctr += 1;
-    }
-
-    auto end = std::chrono::high_resolution_clock::now();
-
-    auto elapsedMilliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-    auto elapsedSeconds = std::chrono::duration_cast<std::chrono::seconds>(end - start).count();
-    std::cout << "Elapsed time in milliseconds: " << elapsedMilliseconds << " ms\n";
-    std::cout << "Elapsed time in seconds: " << elapsedSeconds << " s\n";
-
-
-    std::cout << "All new line positions detected: ";
-    for (size_t pos : new_line_pos) {
-      std::cout << pos << " ";
-    }
-    std::cout << "\n";
-
-
-    // read some chunks to test the main method, next_chunk()
-
-  } catch(const std::exception& e) {
-
-    std::cerr << e.what() << std::endl;
-  }
-
-
-}
+// int main() {
+// 
+//   try{
+//     // instantiate a new read data handler
+//     // off_t bytes = static_cast<off_t>(10);
+// 
+//     auto start = std::chrono::high_resolution_clock::now();
+// 
+//     ReadDataHandler read_data("flights.csv", 500000);
+// 
+//     // std::cout << "Next chunk: " << read_data.next_chunk() << std::endl;
+// 
+//     std::vector<size_t> new_line_pos;
+// 
+//     std::cout << "File size: " << read_data.get_fileSize() << std::endl;
+//     
+//     // std::cout << "All chunk ptrs: " << read_data.get_all_chunk_ptrs() << std::endl;
+//     
+//     std::cout << "All chunk ptrs: [";
+//     const std::vector<off_t>& chunk_ptrs = read_data.get_all_chunk_ptrs();
+//     for (size_t i = 0; i < chunk_ptrs.size(); ++i) {
+//       std::cout << chunk_ptrs[i];
+//       if (i != chunk_ptrs.size() - 1) {
+//         std::cout << ", "; // Add comma between elements
+//       }
+//     }
+//     std::cout << "]" << std::endl;
+// 
+//     std::string* data;
+// 
+//     while( (data = read_data.next_chunk()) != nullptr ) {
+//       // std::cout << *data << std::endl;
+// 
+//       // std::cout << ctr << std::endl;
+//       // starts_here = read_data.get_ptrLocation();
+//       //
+//       // stop = read_data.next_chunk();
+//       //
+//       // // search for metadata for the transformation step (next method)
+//       // for (size_t i = 0; i < stop.size(); ++i) {
+//       //   if (stop[i] == '\n') {
+//       //     new_line_pos.push_back( starts_here + i ); // could we do this in a memory mapped way instead?? just a thought
+//       //   }
+//       // }
+//       //
+//       // ctr += 1;
+//     }
+// 
+//     auto end = std::chrono::high_resolution_clock::now();
+// 
+//     auto elapsedMilliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+//     auto elapsedSeconds = std::chrono::duration_cast<std::chrono::seconds>(end - start).count();
+//     std::cout << "Elapsed time in milliseconds: " << elapsedMilliseconds << " ms\n";
+//     std::cout << "Elapsed time in seconds: " << elapsedSeconds << " s\n";
+// 
+// 
+//     std::cout << "All new line positions detected: ";
+//     for (size_t pos : new_line_pos) {
+//       std::cout << pos << " ";
+//     }
+//     std::cout << "\n";
+// 
+// 
+//     // read some chunks to test the main method, next_chunk()
+// 
+//   } catch(const std::exception& e) {
+// 
+//     std::cerr << e.what() << std::endl;
+//   }
+// 
+// 
+// }
 
 
 
