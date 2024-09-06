@@ -14,6 +14,7 @@ WriteTransposedDataHandler(const std::string& filename, const std::string& filen
                            off_t sync_threshold, off_t read_size, int num_threads);
   
 void write_transpose();
+void write_transpose_multithread();
   
 private:
   TransposeDataHandler data;

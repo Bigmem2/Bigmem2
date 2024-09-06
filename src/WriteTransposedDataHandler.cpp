@@ -77,6 +77,63 @@ void WriteTransposedDataHandler::write_transpose() {
   }
 }
 
+void WriteTransposedDataHandler::write_transpose_multithread() {
+  
+  ReadDataHandler* read_data = data.get_ReadDataHandler();
+  
+  const std::vector<off_t>& all_chunk_ptrs = read_data->get_all_chunk_ptrs();
+  int n_total_chunks = all_chunk_ptrs.size();
+  
+  int work_per_thread = n_total_chunks / num_threads;
+  
+  std::vector<std::thread> threads;
+  
+  int n_row = data.get_n_row();
+  int n_col = data.get_n_col();
+  
+  std::string* chunkPtr;
+  int di = 0;
+  int dj = 0;
+  
+  std::string word;
+  word.reserve( 1024 );
+  int word_len = 0;
+  
+  while( ( chunkPtr = read_data->next_chunk()) != nullptr ) {
+    
+    for(size_t i = 0; i < chunkPtr->size(); ++i) {
+      
+      char element = (*chunkPtr)[i];
+      
+      if( element == ','  || element == '\n' ) {
+        
+        continue;
+      }
+      
+      word.push_back( element );
+      ++word_len;
+      
+      int frag_len = data.get_elem_wordTable(di, dj);
+      
+      if( word_len >=  frag_len - 1 ) {
+        
+        word.push_back( (dj < n_row - 1) ? ',' : '\n' );
+        
+        writer.write_fragment( data.get_elem_cumWordTable(di, dj) - frag_len, word.c_str(), frag_len );
+        
+        word.clear();
+        word_len = 0;
+        
+        if( ++di == n_col ) {
+          
+          di = 0;
+          ++dj;
+        }
+      }
+    }
+  }
+}
+
 int main() {
   
   // WriteTransposedDataHandler transpose_data("output.csv", "output_transpose.csv", 20708, 2*100*2^20, 100*2^20);
